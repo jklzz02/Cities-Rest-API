@@ -16,6 +16,8 @@ abstract class Controller
             case "POST":
                 $this->handlePost($request);
                 break;
+            case "PATCH":
+                $this->handlePatch($request);
             case "PUT":
                 $this->handlePut($request);
                 break;
@@ -28,6 +30,7 @@ abstract class Controller
 
     protected abstract function handleGet(Request $request): void;
     protected abstract function handlePost(Request $request): void;
+    protected abstract function handlePatch(Request $reuqest) :void;
     protected abstract function handlePut(Request $request): void;
     protected abstract function handleDelete(Request $request): void;
 

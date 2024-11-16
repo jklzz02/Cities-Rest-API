@@ -20,6 +20,7 @@ $citiesController = App::resolve(CitiesController::class);
 
 $router->add('GET', '/v1/cities', $citiesController);
 $router->add('POST', '/v1/cities', $citiesController)->auth();
+$router->add('PATCH', '/v1/cities', $citiesController)->auth();
 $router->add('PUT', '/v1/cities', $citiesController)->auth();
 $router->add('DELETE', '/v1/cities', $citiesController)->auth();
 

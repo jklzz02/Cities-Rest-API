@@ -65,7 +65,7 @@ class CitiesController extends Controller
         $this->response->created();
     }
 
-    protected function handlePut(Request $request): void
+    protected function handlePatch(Request $request): void
     {
         $params = $request->getQuery();
         $data = $request->getBody();
@@ -82,6 +82,28 @@ class CitiesController extends Controller
         
         $this->response->success("Resource Upated");
 
+    }
+
+    protected function handlePut(Request $request): void
+    {
+        $params = $request->getQuery();
+        $data = $request->getBody();
+
+        if (!isset($params['id'])) {
+
+            $this->response->badRequest("ID is required");
+        }
+
+        if (!isset($data['name'], $data['lat'], $data['lon'], $data['population'], $data['country'])) {
+           $this->response->badRequest("Missing Data");
+        }
+
+        if(!$this->gateway->update((int)$params['id'], $data)){
+
+            $this->response->internalError();
+        }
+
+        $this->response->success("Resource Upated");
     }
 
     protected function handleDelete(Request $request): void
