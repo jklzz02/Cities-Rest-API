@@ -20,21 +20,21 @@ class CitiesTableGateway implements Gateway
     {
         $stmt = $this->connection->prepare("SELECT * FROM cities WHERE id = :id");
         $stmt->execute([':id' => $id]);
-        return $stmt->fetch() ?? [];
+        return $stmt->fetch() ?: [];
     }
 
     public function findAllByName(string $name): array
     {
         $stmt = $this->connection->prepare("SELECT * FROM cities WHERE name = :name COLLATE NOCASE");
         $stmt->execute([':name' => $name]);
-        return $stmt->fetchAll() ?? [];
+        return $stmt->fetchAll() ?: [];
     }
 
     public function findAllByCountry(string $country) :array
     {
         $stmt = $this->connection->prepare("SELECT * FROM cities WHERE country = :country COLLATE NOCASE");
         $stmt->execute([':country' => $country]);
-        return $stmt->fetchAll() ?? [];
+        return $stmt->fetchAll() ?: [];
     }
 
     public function findAll(array $conditions = []): array

@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Core;
 
 
 use Jklzz02\RestApi\interfaces\Controller;
+use Jklzz02\RestApi\Middleware\MiddleWare;
 
 class Router
 {

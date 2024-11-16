@@ -80,7 +80,7 @@ class CitiesController extends Controller
             $this->response->internalError();
         }
         
-        $this->response->noContent("Resource Upated");
+        $this->response->success("Resource Upated");
 
     }
 
@@ -97,7 +97,7 @@ class CitiesController extends Controller
             $this->response->internalError();
         }
 
-        $this->response->noContent("Resource Deleted");
+        $this->response->success("Resource Deleted");
     }
 
 }
