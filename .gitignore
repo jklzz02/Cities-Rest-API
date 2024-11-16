@@ -1,0 +1,7 @@
+.idea
+.vscode
+.laragon
+.env
+vendor
+composer.lock
+db.sqlite3
