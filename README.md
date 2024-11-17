@@ -21,11 +21,13 @@ GET http://domain/v1/cities?id={city_id}
 
 inserting the id as a `query param` it's possible to retrieve the information of the city with that specic id.
 
+#### Example request
+
 ```http
 GET http://domain/v1/cities?id=1
 ```
 
-#### response
+#### Example response
 
 ```json
 {
@@ -44,6 +46,8 @@ GET http://domain/v1/cities?id=1
 
 ### Cities by name
 
+#### Example request
+
 ```http
 GET http://domain/v1/cities?city={your_city_name}
 
@@ -56,7 +60,8 @@ The search is case insensitive, it's not required to titleize the city name.
 GET http://domain/v1/cities?city=rome
 ```
 
-response
+#### Example response
+
 
 ```json
 {
@@ -127,11 +132,13 @@ GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
 
 It suffice to pass `lat` and `lon` as `query params`.
 
+#### Example request
+
 ```http
 GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
-response
+#### Example response
 
 ```json
 {
