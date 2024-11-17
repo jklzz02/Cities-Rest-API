@@ -46,8 +46,6 @@ GET http://domain/v1/cities?id=1
 
 ### Cities by name
 
-#### Example request
-
 ```http
 GET http://domain/v1/cities?city={your_city_name}
 
@@ -55,6 +53,9 @@ GET http://domain/v1/cities?city={your_city_name}
 
 Using this `URL` is possible to retrieve the information of all the cities that share the requested name.
 The search is case insensitive, it's not required to titleize the city name.
+
+#### Example request
+
 
 ```http
 GET http://domain/v1/cities?city=rome
