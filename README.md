@@ -5,7 +5,7 @@ This project is a rest API to retrieve cities information and supports CRUD oper
 ## Base Endpoint
 
 ```http
-http://domain/v1/cities
+GET http://domain/v1/cities
 
 ```
 
@@ -16,13 +16,13 @@ This is the endopint to make the requests, retrieve cities information, update o
 ### City by ID
 
 ```http
-http://domain/v1/cities?id={city_id}
+GET http://domain/v1/cities?id={city_id}
 ```
 
 inserting the id as a `query param` it's possible to retrieve the information of the city with that specic id.
 
 ```http
-http://domain/v1/cities?id=1
+GET http://domain/v1/cities?id=1
 ```
 
 #### response
@@ -45,7 +45,7 @@ http://domain/v1/cities?id=1
 ### Cities by name
 
 ```http
-http://domain/v1/cities?city={your_city_name}
+GET http://domain/v1/cities?city={your_city_name}
 
 ```
 
@@ -53,7 +53,7 @@ Using this `URL` is possible to retrieve the information of all the cities that 
 The search is case insensitive, it's not required to titleize the city name.
 
 ```http
-http://domain/v1/cities?city=rome
+GET http://domain/v1/cities?city=rome
 ```
 
 response
@@ -122,13 +122,13 @@ response
 To be very precise is possible retrieve a specific city trhough its latitude and longitute.
 
 ```http
-http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
+GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
 ```
 
 It suffice to pass `lat` and `lon` as `query params`.
 
 ```http
-http://domain/v1/cities?lat=41.89193&lon=12.51133
+GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
 response
