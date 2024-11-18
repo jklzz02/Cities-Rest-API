@@ -1,6 +1,6 @@
 # Cities Rest API
 
-This project is a rest API to retrieve cities information and supports CRUD operations.The dataset contains info on over **140.000** cities around the world.
+This is learning project, to learn about rest API by making one that can retrive cities information and supports CRUD operations. The [dataset](/sql/cities.json) contains info on over **140.000** cities around the world.
 
 ## Base Endpoint
 
@@ -30,8 +30,6 @@ GET http://domain/v1/cities?id=1
 
 ```json
 {
-    "status": 200,
-    "message": "Resource Retrieved",
     "data": {
         "id": 1,
         "name": "Beijing",
@@ -62,11 +60,8 @@ GET http://domain/v1/cities?city=rome
 
 #### Example response
 
-
 ```json
 {
-    "status": 200,
-    "message": "Resource Retrieved",
     "data": [
         {
             "id": 150,
@@ -142,9 +137,7 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 
 ```json
 {
-    "status": 200,
-    "message": "Resource Retrieved",
-    "data": [
+    "data":
         {
             "id": 150,
             "name": "Rome",
@@ -153,8 +146,60 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
             "lat": 41.89193,
             "lon": 12.51133
         }
-    ]
 }
 ```
 
 >**NOTE**: there can't be two cities with the same latitude and longitude.
+
+## Setup the Dev Environment
+
+### Create Database and tables
+
+In the [sql](/sql) directory, there are schemas for different type of `SQL` supported databases. It will suffice to run the chosen schema.sql script to initialize the empty tables in the database.
+
+### Populate Database
+
+#### Token Table
+
+The token table is meant for testing authentication for CRUD operation, you can generate your tokens and insert them in the database.
+
+#### Cities Table
+
+If you've created the database successfully it will suffice to run the [seed](/sql/cities_seed.sql) script to populate the database of all the cities in the dataset.
+
+### Config and .env Setup
+
+In the dotenv it is possible to specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, msql, pgsql, sqlsrv.
+ 
+#### .env example for a SQLite database
+
+```.env
+database_type=sqlite
+database_name=your_sqlite_database.sqlite3
+database_port=
+database_username=
+database_password=
+```
+
+in the case of a `SQLite` database `database_name` will refer to its path, it will be joined with the root path of the project directory, so it's also possible to indicate a subdirectory.
+
+```.env
+database_name=subdir/your_sql_database.sqlite3
+```
+
+that's how the [Database](/src/Core/Database.php) class is gonna handle the dsn
+
+```PHP
+$dsn = "sqlite:" . BASE_PATH  . $config["name"];
+```
+
+#### .env example for MySQL/PostgreSQL database
+
+```.env
+database_type=sqlite
+database_name=your_database_name
+database_host=localhost # or the IP address of your server
+database_port=3306 # or the port your MySQL/PostgreSQL server uses
+database_username=your_username
+database_password=your_password
+```
