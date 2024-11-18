@@ -196,7 +196,7 @@ $dsn = "sqlite:" . BASE_PATH  . $config["name"];
 #### .env example for MySQL/PostgreSQL database
 
 ```.env
-database_type=sqlite
+database_type=your_database_type # msql/pgsql
 database_name=your_database_name
 database_host=localhost # or the IP address of your server
 database_port=3306 # or the port your MySQL/PostgreSQL server uses
