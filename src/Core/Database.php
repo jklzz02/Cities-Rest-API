@@ -23,7 +23,7 @@ class Database
         );
     }
 
-    public function dsn($config) : string
+    protected function dsn($config) : string
     {
         $type = $config["type"] ?? "sqlite";
 

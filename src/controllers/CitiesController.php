@@ -72,6 +72,12 @@ class CitiesController extends Controller
             $this->response->badRequest("ID is required");
         }
 
+
+        if(!$this->gateway->update((int)$params['id'], $data)){
+
+            $this->response->notFound("Cannot Update Resource with ID: {$params['id']} Not Found");
+        }
+
         $this->gateway->update((int)$params['id'], $data);
         $this->response->success("Resource Upated");
 
@@ -91,7 +97,11 @@ class CitiesController extends Controller
            $this->response->badRequest("Missing Data");
         }
 
-        $this->gateway->update((int)$params['id'], $data);
+        if(!$this->gateway->update((int)$params['id'], $data)){
+
+            $this->response->notFound("Cannot Update Resource with ID: {$params['id']} Not Found");
+        }
+
         $this->response->success("Resource Upated");
     }
 
@@ -104,7 +114,12 @@ class CitiesController extends Controller
             $this->response->badRequest("ID is required");
         }
 
-        $this->gateway->delete((int)$params['id']);
+        if (!$this->gateway->delete((int)$params['id'])) {
+
+            $this->response->notFound("Cannot Delete resource with ID: {$params['id']} Not Found");
+        }
+
+
         $this->response->success("Resource Deleted");
     }
 

@@ -71,8 +71,8 @@ class CitiesTableGateway implements Gateway
 
     public function update(int $id, array $data): bool
     {
-        
         $this->validate($data);
+        if(!$this->checkId($id)) return false;
 
         $setClause = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
         $data['id'] = $id;
@@ -83,15 +83,23 @@ class CitiesTableGateway implements Gateway
 
     public function delete(int $id): bool
     {
+        if(!$this->checkId($id)) return false;
         $stmt = $this->connection->prepare("DELETE FROM cities WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    protected function validate($data)
+    protected function validate(array $data): void
     {
         $diff = array_diff(array_keys($data), static::columns);
         if ($diff) {
             throw new \InvalidArgumentException("Unknown column(s): ". implode(",", $diff));
         }
+    }
+
+    protected function checkId(int $id): bool
+    {
+        $stmnt = $this->connection->prepare("SELECT COUNT(*) FROM cities where id = :id");
+        $stmnt->execute([':id' => $id]);
+        return $stmnt->fetchColumn() > 0;
     }
 }
