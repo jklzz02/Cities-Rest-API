@@ -26,9 +26,9 @@ class CitiesController extends Controller
 
             $result = $this->gateway->find((int)$params['id']);
         }
-        elseif ($params['city'] ?? false) {
+        elseif ($params['name'] ?? false) {
 
-            $result = $this->gateway->findAllByName($params['city']);
+            $result = $this->gateway->findAllByName($params['name']);
         }
         elseif ($params['country']) {
             $result = $this->gateway->findAllByCountry($params['country']);
