@@ -50,10 +50,7 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if (!isset($params['id'])) {
-
-            $this->response->badRequest("ID is required");
-        }
+        if (!isset($params['id'])) $this->response->badRequest("ID is required");
 
 
         if(!$this->gateway->update((int)$params['id'], $data)){
@@ -71,10 +68,7 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if (!isset($params['id'])) {
-
-            $this->response->badRequest("ID is required");
-        }
+        if (!isset($params['id'])) $this->response->badRequest("ID is required");
 
         if (!isset($data['name'], $data['lat'], $data['lon'], $data['population'], $data['country'])) {
            $this->response->badRequest("Missing Data");
@@ -92,10 +86,7 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        if (!isset($params['id'])) {
-
-            $this->response->badRequest("ID is required");
-        }
+        if (!isset($params['id'])) $this->response->badRequest("ID is required");
 
         if (!$this->gateway->delete((int)$params['id'])) {
 
