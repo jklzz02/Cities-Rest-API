@@ -175,7 +175,7 @@ In the dotenv it is possible to specify the type of database to use, make sure t
 
 ```.env
 database_type=sqlite
-database_name=your_sqlite_database.sqlite3
+database_name=your_database.sqlite3
 database_host=
 database_port=
 database_username=
