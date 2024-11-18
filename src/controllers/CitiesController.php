@@ -22,30 +22,13 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        if ($params['id'] ?? false) {
+        $result = match(true){
+            array_key_exists('id', $params) && count($params) === 1 => $this->gateway->find((int)$params['id']),
+            !empty($params) => $this->gateway->findAll($params),
+            default => null
+        };
 
-            $result = $this->gateway->find((int)$params['id']);
-        }
-        elseif ($params['name'] ?? false) {
-
-            $result = $this->gateway->findAllByName($params['name']);
-        }
-        elseif ($params['country']) {
-            $result = $this->gateway->findAllByCountry($params['country']);
-        }
-        elseif ($params['lat'] ?? false && $params['lon'] ?? false) {
-            
-            $result = $this->gateway->findAll([
-                'lat' => $params['lat'],
-                'lon' => $params['lon']
-            ]);
-        }
-
-
-        if(!$result){
-
-            $this->response->notFound();
-        }
+        if(!$result) $this->response->notFound();
 
         $this->response->success("Resource Retrieved", $result);
     }

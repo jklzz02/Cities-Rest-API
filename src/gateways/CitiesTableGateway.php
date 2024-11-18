@@ -24,29 +24,18 @@ class CitiesTableGateway implements Gateway
         return $stmt->fetch() ?: [];
     }
 
-    public function findAllByName(string $name): array
-    {
-        $stmt = $this->connection->prepare("SELECT * FROM cities WHERE name = :name COLLATE NOCASE");
-        $stmt->execute([':name' => $name]);
-        return $stmt->fetchAll() ?: [];
-    }
-
-    public function findAllByCountry(string $country) :array
-    {
-        $stmt = $this->connection->prepare("SELECT * FROM cities WHERE country = :country COLLATE NOCASE");
-        $stmt->execute([':country' => $country]);
-        return $stmt->fetchAll() ?: [];
-    }
-
     public function findAll(array $conditions = []): array
     {
+
+        $this->validate($conditions);
+
         $query = "SELECT * FROM cities";
         $params = [];
 
         if (!empty($conditions)) {
             $clauses = [];
             foreach ($conditions as $key => $value) {
-                $clauses[] = "$key = :$key";
+                $clauses[] = "$key COLLATE NOCASE = :$key ";
                 $params[":$key"] = $value;
             }
             $query .= ' WHERE ' . implode(' AND ', $clauses);
