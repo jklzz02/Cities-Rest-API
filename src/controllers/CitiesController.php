@@ -58,10 +58,7 @@ class CitiesController extends Controller
            $this->response->badRequest("Missing Data");
         }
 
-        if(!$this->gateway->insert($data)){
-            $this->response->internalError();
-        }
-
+        $this->gateway->insert($data);
         $this->response->created();
     }
 
@@ -75,11 +72,7 @@ class CitiesController extends Controller
             $this->response->badRequest("ID is required");
         }
 
-        if(!$this->gateway->update((int)$params['id'], $data)){
-
-            $this->response->internalError();
-        }
-        
+        $this->gateway->update((int)$params['id'], $data);
         $this->response->success("Resource Upated");
 
     }
@@ -98,11 +91,7 @@ class CitiesController extends Controller
            $this->response->badRequest("Missing Data");
         }
 
-        if(!$this->gateway->update((int)$params['id'], $data)){
-
-            $this->response->internalError();
-        }
-
+        $this->gateway->update((int)$params['id'], $data);
         $this->response->success("Resource Upated");
     }
 
@@ -115,10 +104,7 @@ class CitiesController extends Controller
             $this->response->badRequest("ID is required");
         }
 
-        if(!$this->gateway->delete((int)$params['id'])){
-            $this->response->internalError();
-        }
-
+        $this->gateway->delete((int)$params['id']);
         $this->response->success("Resource Deleted");
     }
 

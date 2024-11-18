@@ -8,22 +8,34 @@ class Database
 {
     protected PDO $connection;
 
-    public function __construct(string $path)
+    public function __construct(array $config)
     {
-        try {
-            $this->connection = new PDO(
-                "sqlite:$path",
-                '',
-                '',
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]
-            );
-        } catch (\PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
-        }
+        $dsn = $this->dsn($config);
+
+        $this->connection = new PDO(
+            $dsn,
+            $config["username"] ?? '',
+            $config["password"] ?? '',
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]
+        );
     }
+
+    public function dsn($config) : string
+    {
+        $type = $config["type"] ?? "sqlite";
+
+        $dsn = match($type){
+            "mysql", "pgsql" => "$type:host={$config['host']};port={$config['port']};dbname={$config['name']}",
+            "sqlsrv" => "sqlsrv:Server={$config['host']},{$config['port']};Database={$config['name']}",
+            "sqlite" => "sqlite:" . BASE_PATH  . $config["name"],
+        };
+
+        return $dsn;
+    }
+
 
     public function getConnection(): PDO
     {

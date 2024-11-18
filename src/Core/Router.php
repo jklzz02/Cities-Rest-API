@@ -9,6 +9,8 @@ use Jklzz02\RestApi\Middleware\MiddleWare;
 class Router
 {
     protected array $routes = [];
+    public const int DEFAULT_ERRORE_CODE = 404;
+    public const string DEFAULT_ERROR_MESSAGE = "Resource Not Found";
 
     public function add(string $method, string $path, Controller $controller) :static
     {
@@ -50,7 +52,7 @@ class Router
             }
         }
 
-        $this->abort(404, "Resource Not Found");
+        $this->abort(static::DEFAULT_ERRORE_CODE, static::DEFAULT_ERROR_MESSAGE);
     }
 
     private function abort(int $status, string $message): void

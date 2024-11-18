@@ -7,5 +7,11 @@ if (file_exists(BASE_PATH . '.env')) {
 }
 
 return [
-    "database" => $_ENV["database"]
+    "database" => [
+        "type" => $_ENV["database_type"],
+        "port" => $_ENV["database_port"],
+        "name" => $_ENV["database_name"],
+        "username" => $_ENV["username"] ?? '',
+        "password" => $_ENV["password"] ?? '',
+    ]
 ];
