@@ -10,6 +10,7 @@ use PDO;
 class CitiesTableGateway implements Gateway
 {
     protected PDO $connection;
+    protected const array columns = ['name', 'lat', 'lon', 'population', 'country'];
 
     public function __construct(Database $database)
     {
@@ -58,6 +59,9 @@ class CitiesTableGateway implements Gateway
 
     public function insert(array $data): bool
     {
+
+        $this->validate($data);
+
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_map(fn($key) => ":$key", array_keys($data)));
 
@@ -67,6 +71,9 @@ class CitiesTableGateway implements Gateway
 
     public function update(int $id, array $data): bool
     {
+        
+        $this->validate($data);
+
         $setClause = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
         $data['id'] = $id;
 
@@ -78,5 +85,13 @@ class CitiesTableGateway implements Gateway
     {
         $stmt = $this->connection->prepare("DELETE FROM cities WHERE id = :id");
         return $stmt->execute([':id' => $id]);
+    }
+
+    protected function validate($data)
+    {
+        $diff = array_diff(array_keys($data), static::columns);
+        if ($diff) {
+            throw new \InvalidArgumentException("Unknown column(s): ". implode(",", $diff));
+        }
     }
 }
