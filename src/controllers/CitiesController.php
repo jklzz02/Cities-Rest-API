@@ -23,7 +23,7 @@ class CitiesController extends Controller
         $params = $request->getQuery();
 
         $result = match(true){
-            array_key_exists('id', $params) && count($params) === 1 => $this->gateway->find((int)$params['id']),
+            isset($params['id']) && array_keys($params) === ['id'] => $this->gateway->find((int)$params['id']),
             !empty($params) => $this->gateway->findAll($params),
             default => null
         };
