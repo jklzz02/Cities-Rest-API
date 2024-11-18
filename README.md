@@ -20,13 +20,13 @@ GET http://domain/v1/cities?id={city_id}
 
 inserting the id as a `query param` it's possible to retrieve the information of the city with that specic id.
 
-#### Example request
+#### Example request with ID
 
 ```http
 GET http://domain/v1/cities?id=1
 ```
 
-#### Example response
+#### Example response with ID
 
 ```json
 {
@@ -51,14 +51,14 @@ GET http://domain/v1/cities?city={your_city_name}
 Using this `URL` is possible to retrieve the information of all the cities that share the requested name.
 The search is case insensitive, it's not required to titleize the city name.
 
-#### Example request
+#### Example request with name
 
 
 ```http
 GET http://domain/v1/cities?city=rome
 ```
 
-#### Example response
+#### Example response with name
 
 ```json
 {
@@ -115,7 +115,7 @@ GET http://domain/v1/cities?city=rome
 }
 ```
 
->**NOTE**: the cities are ordered by population in a decreasing order.
+>**NOTE** the cities are ordered by population in a decreasing order.
 
 ### City by latitude and longitude
 
@@ -127,13 +127,13 @@ GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
 
 It suffice to pass `lat` and `lon` as `query params`.
 
-#### Example request
+#### Example request with latitude and longitude
 
 ```http
 GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
-#### Example response
+#### Example response with latitude and logitude
 
 ```json
 {
@@ -149,9 +149,63 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 }
 ```
 
->**NOTE**: there can't be two cities with the same latitude and longitude.
+>**NOTE** there can't be two cities with the same latitude and longitude.
+
+### City by multiple params
+
+It's possible to use more params to narrow the matching results
+
+#### Example request with mutliple parameters
+
+```HTTP
+GET http://domain/v1/cities?name=rome&country=it
+```
+
+#### Example response with multiple parameters
+
+```json
+{
+    "data":
+        {
+            "id": 150,
+            "name": "Rome",
+            "country": "IT",
+            "population": 2318895,
+            "lat": 41.89193,
+            "lon": 12.51133
+        }
+}
+
+```
+
+>**NOTE** the search is case insensitive and the result have been narrowed to one result.
 
 ## Setup the Dev Environment
+
+### Language Level and Dependencies
+
+To run the project is required PHP **8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries
+
+#### Libraries
+
+The only used library is [vlucas/dotenv](https://github.com/vlucas/phpdotenv) a .env loader.
+It is used int he [config](/src/config.php) to populate `$_ENV` super global with environment variable.
+
+```PHP
+if (file_exists(BASE_PATH . '.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+    $dotenv->load();
+}
+```
+
+Needed libraries and their versions can be consulted in [composer.json](/composer.json)
+To install needed libraries run:
+
+```BASH
+composer install
+```
+
+in the root directory of the project.
 
 ### Create Database and tables
 
@@ -169,7 +223,7 @@ If you've created the database successfully it will suffice to run the [seed](/s
 
 ### Config and .env Setup
 
-In the dotenv it is possible to specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, msql, pgsql, sqlsrv.
+In the dotenv it is possible to specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, mysql, pgsql, sqlsrv.
  
 #### .env example for a SQLite database
 
@@ -185,7 +239,7 @@ database_password=
 in the case of a `SQLite` database `database_name` will refer to its path, it will be joined with the root path of the project directory, so it's also possible to indicate a subdirectory.
 
 ```.env
-database_name=subdir/your_sql_database.sqlite3
+database_name=subdir/your_database.sqlite3
 ```
 
 that's how the [Database](/src/Core/Database.php) class is gonna handle the dsn
@@ -197,7 +251,7 @@ $dsn = "sqlite:" . BASE_PATH  . $config["name"];
 #### .env example for MySQL/PostgreSQL database
 
 ```.env
-database_type=your_database_type # msql/pgsql
+database_type=your_database_type # mysql/pgsql
 database_name=your_database_name
 database_host=localhost # or the IP address of your server
 database_port=3306 # or the port your MySQL/PostgreSQL server uses
@@ -205,4 +259,4 @@ database_username=your_username
 database_password=your_password
 ```
 
->**NOTE**: the username and password aren't mandatory
+>**NOTE** username and password aren not mandatory.
