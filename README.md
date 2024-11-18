@@ -4,9 +4,8 @@ This project is a rest API to retrieve cities information and supports CRUD oper
 
 ## Base Endpoint
 
-```http
-GET http://domain/v1/cities
-
+```
+http://domain/v1/cities
 ```
 
 This is the endopint to make the requests, retrieve cities information, update or delete data. The response will be in `JSON` format.
