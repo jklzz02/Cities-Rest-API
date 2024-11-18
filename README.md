@@ -1,6 +1,6 @@
 # Cities Rest API
 
-This is a learning project, to learn about rest API by making one that can retrive cities information and supports CRUD operations. The [dataset](/sql/cities.json) contains info on over **140.000** cities around the world.
+This is a learning project, madeto learn about rest API by making one from scratch, capable of retrivieving cities information and supporting CRUD operations. The datbase used for the project contains info on over **140.000** cities around the world.
 
 ## Base Endpoint
 
@@ -18,7 +18,7 @@ This is the endopint to make the requests, retrieve cities information, update o
 GET http://domain/v1/cities?id={city_id}
 ```
 
-inserting the id as a `query param` it's possible to retrieve the information of the city with that specic id.
+inserting the id as a `query parameter` it's possible to retrieve the information of the city with that specic id.
 
 #### Example request with ID
 
@@ -115,17 +115,17 @@ GET http://domain/v1/cities?city=rome
 }
 ```
 
->**NOTE** the cities are ordered by population in a decreasing order.
+>**NOTE** cities are ordered by population in a decreasing order.
 
 ### City by latitude and longitude
 
-To be very precise is possible retrieve a specific city trhough its latitude and longitute.
+It's possible to retrieve a specific city trhough its latitude and longitude.
 
 ```http
 GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
 ```
 
-It suffice to pass `lat` and `lon` as `query params`.
+It suffice to pass `lat` and `lon` as `query parameters`.
 
 #### Example request with latitude and longitude
 
@@ -149,11 +149,11 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 }
 ```
 
->**NOTE** there can't be two cities with the same latitude and longitude.
+>**NOTE** there can't be two cities with the same latitude or longitude.
 
-### City by multiple params
+### City by multiple parameters
 
-It's possible to use more params to narrow the matching results
+It's possible to use more parameters to narrow the matching results
 
 #### Example request with mutliple parameters
 
@@ -178,7 +178,7 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ```
 
->**NOTE** the search is case insensitive and the result have been narrowed to one result.
+>**NOTE** the search is case insensitive and the results have been narrowed to one.
 
 ## Setup the Dev Environment
 
@@ -189,7 +189,7 @@ To run the project is required PHP **8.2** or higher and [composer](https://getc
 #### Libraries
 
 The only used library is [vlucas/dotenv](https://github.com/vlucas/phpdotenv) a .env loader.
-It is used int he [config](/src/config.php) to populate `$_ENV` super global with environment variable.
+It is used in the [config](/src/config.php) to populate `$_ENV` super global with environment variable.
 
 ```PHP
 if (file_exists(BASE_PATH . '.env')) {
@@ -199,7 +199,7 @@ if (file_exists(BASE_PATH . '.env')) {
 ```
 
 Needed libraries and their versions can be consulted in [composer.json](/composer.json)
-To install needed libraries run:
+to install needed libraries run:
 
 ```BASH
 composer install
