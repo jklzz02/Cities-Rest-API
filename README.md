@@ -4,7 +4,7 @@ This is a learning project, madeto learn about rest API by making one from scrat
 
 ## Base Endpoint
 
-```
+```url
 http://domain/v1/cities
 ```
 
@@ -28,6 +28,9 @@ GET http://domain/v1/cities?id=1
 
 #### Example response with ID
 
+<details>
+<summary>View JSON Data</summary>
+
 ```json
 {
     "data": {
@@ -41,6 +44,8 @@ GET http://domain/v1/cities?id=1
 }
 ```
 
+</details>
+
 ### Cities by name
 
 ```http
@@ -53,12 +58,14 @@ The search is case insensitive, it's not required to titleize the city name.
 
 #### Example request with name
 
-
 ```http
 GET http://domain/v1/cities?city=rome
 ```
 
 #### Example response with name
+
+<details>
+<summary>View JSON Data</summary>
 
 ```json
 {
@@ -116,6 +123,8 @@ GET http://domain/v1/cities?city=rome
 ```
 
 >**NOTE** cities are ordered by population in a decreasing order.
+</details>
+
 
 ### City by latitude and longitude
 
@@ -134,6 +143,8 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
 #### Example response with latitude and logitude
+<details>
+<summary>View JSON Data</summary>
 
 ```json
 {
@@ -150,6 +161,7 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
 >**NOTE** there can't be two cities with the same latitude or longitude.
+</details>
 
 ### City by multiple parameters
 
@@ -162,6 +174,9 @@ GET http://domain/v1/cities?name=rome&country=it
 ```
 
 #### Example response with multiple parameters
+
+<details>
+<summary>View JSON Data</summary>
 
 ```json
 {
@@ -179,6 +194,8 @@ GET http://domain/v1/cities?name=rome&country=it
 ```
 
 >**NOTE** the search is case insensitive and the results have been narrowed to one.
+</details>
+
 
 ## Setup the Dev Environment
 
@@ -224,7 +241,7 @@ If you've created the database successfully it will suffice to run the [seed](/s
 ### Config and .env Setup
 
 In the dotenv it is possible to specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, mysql, pgsql, sqlsrv.
- 
+
 #### .env example for a SQLite database
 
 ```.env
