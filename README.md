@@ -1,6 +1,6 @@
 # Cities Rest API
 
-This is learning project, to learn about rest API by making one that can retrive cities information and supports CRUD operations. The [dataset](/sql/cities.json) contains info on over **140.000** cities around the world.
+This is a learning project, to learn about rest API by making one that can retrive cities information and supports CRUD operations. The [dataset](/sql/cities.json) contains info on over **140.000** cities around the world.
 
 ## Base Endpoint
 
