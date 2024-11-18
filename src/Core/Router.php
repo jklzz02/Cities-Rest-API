@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Core;
 
 
 use Jklzz02\RestApi\interfaces\Controller;
+use Jklzz02\RestApi\Middleware\Auth;
 use Jklzz02\RestApi\Middleware\MiddleWare;
 
 class Router
@@ -29,7 +30,7 @@ class Router
     public function auth() :void
     {
        $route = array_key_last($this->routes);
-       $this->routes[$route]["middleware"] = "auth"; 
+       $this->routes[$route]["middleware"] = Auth::class; 
     }
 
     public function dispatch(Request $request): void

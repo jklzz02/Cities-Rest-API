@@ -7,21 +7,15 @@ use Jklzz02\RestApi\Core\App;
 class MiddleWare{
 
     protected const array MAP = [
-
-        "auth" => Auth::class
+        Auth::class
     ];
 
-    public static function resolve(string|null $key): void
+    public static function resolve(?string $middleware): void
     {
-        if(!$key){
-            return;
-        }
 
-        $middleware = MiddleWare::MAP[$key];
+        if(!in_array($middleware, static::MAP)){
 
-        if(!$middleware){
-
-            throw new \Exception("No matching middleware found for '$key' ");
+            throw new \Exception("No matching middleware found for '$middleware' ");
         }
 
         App::resolve($middleware)->handle();
