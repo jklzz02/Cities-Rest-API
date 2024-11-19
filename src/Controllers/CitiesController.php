@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Controllers;
 
 use Jklzz02\RestApi\Core\Response;
 use Jklzz02\RestApi\Core\Request;
+use Jklzz02\RestApi\Core\Validator;
 use Jklzz02\RestApi\Gateways\CitiesTableGateway;
 use Jklzz02\RestApi\Interfaces\Controller;
 
@@ -23,8 +24,8 @@ class CitiesController extends Controller
         $params = $request->getQuery();
 
         $result = match(true){
-            isset($params['id']) && array_keys($params) === ['id'] => $this->gateway->find((int)$params['id']),
-            !empty($params) => $this->gateway->findAll($params),
+            Validator::integer($params['id'] ?? false) => $this->gateway->find($params['id']),
+            !empty($params) && !key_exists('id', $params) => $this->gateway->findAll($params),
             default => null
         };
 
@@ -37,10 +38,10 @@ class CitiesController extends Controller
     {
         $data = $request->getBody();
 
-        if (!isset($data['name'], $data['lat'], $data['lon'], $data['population'], $data['country'])) {
-           $this->response->badRequest("Missing Data");
-        }
-
+        $missing = Validator::array($data, ['name', 'population', 'country', 'lat', 'lon']);
+        
+        if ($missing) $this->response->badRequest($missing);
+        
         $this->gateway->insert($data);
         $this->response->created();
     }
@@ -50,12 +51,12 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if (!isset($params['id'])) $this->response->badRequest("ID is required");
+        if (!Validator::integer($params['id'])) $this->response->badRequest("Invalid id");
 
 
-        if(!$this->gateway->update((int)$params['id'], $data)){
+        if(!$this->gateway->update($params['id'], $data)){
 
-            $this->response->notFound("Cannot Update Resource with ID: {$params['id']} Not Found");
+            $this->response->notFound("Cannot Update Resource");
         }
 
         $this->gateway->update((int)$params['id'], $data);
@@ -68,15 +69,17 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if (!isset($params['id'])) $this->response->badRequest("ID is required");
-
-        if (!isset($data['name'], $data['lat'], $data['lon'], $data['population'], $data['country'])) {
-           $this->response->badRequest("Missing Data");
+        if(!Validator::integer($params['id'] ?? false)){
+            $this->response->badRequest("Invalid id");
         }
 
-        if(!$this->gateway->update((int)$params['id'], $data)){
+        $missing = Validator::array($params, ['name', 'country', 'population', 'lat', 'lon']);
 
-            $this->response->notFound("Cannot Update Resource with ID: {$params['id']} Not Found");
+        if ($missing) $this->response->badRequest($missing);
+
+        if(!$this->gateway->update($params['id'], $data)){
+
+            $this->response->notFound("Cannot Update Resource");
         }
 
         $this->response->success("Resource Upated");
@@ -86,11 +89,11 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        if (!isset($params['id'])) $this->response->badRequest("ID is required");
+        if (!Validator::integer($params['id'])) $this->response->badRequest("Invalid id");
 
-        if (!$this->gateway->delete((int)$params['id'])) {
+        if (!$this->gateway->delete($params['id'])) {
 
-            $this->response->notFound("Cannot Delete resource with ID: {$params['id']} Not Found");
+            $this->response->notFound("Cannot Delete resource with ID: {$params['id']}. Not Found");
         }
 
 

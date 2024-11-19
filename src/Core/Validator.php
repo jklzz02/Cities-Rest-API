@@ -2,36 +2,46 @@
 
 namespace Jklzz02\RestApi\Core;
 
-class Validator{
+class Validator
+{
+    public static function integer(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
+    {
+        if (!is_numeric($value) || (int)$value != $value){
+            return false;
+        }
 
-    protected array $errors = [];
-    public const string ARRAY_ERROR = "array";
-    public const string STRING_ERROR = "string";
-    public const string INTEGER_ERROR = "integer";
+        $int = (int) $value;
 
-    public function array(array $source, array $required): void
+        if ($int < $min || $int > $max){
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function string(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
+    {
+        if (!is_string($value)){
+            return false;
+        }
+
+        $length = strlen($value);
+
+        if ($length < $min || $length > $max) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function array(array $source, array $required): ?string
     {
         $missingKeys = array_diff($required, array_keys($source));
 
         if (!empty($missingKeys)) {
             $missingKeysList = implode(', ', $missingKeys);
-            $this->errors[static::ARRAY_ERROR] = "Missing required parameters: {$missingKeysList}";
+            return "Missing required parameter(s): {$missingKeysList}";
         }
-    }
-    
-    public function getAllErrors(): array
-    {
-        return $this->errors;
-    }
 
-    public function getError(string $key, string $default = ""): string
-    {
-        return $this->errors[$key] ?? $default;
     }
-
-    public function validate(): bool
-    {
-        return (bool) count($this->errors);
-    }
-
 }
