@@ -1,6 +1,6 @@
 # Cities Rest API
 
-This is a learning project, madeto learn about rest API by making one from scratch, capable of retrivieving cities information and supporting CRUD operations. The datbase used for the project contains info on over **140.000** cities around the world.
+This is a learning project, made to learn about rest API by making one from scratch, capable of retrivieving cities information and supporting CRUD operations. The datbase used for the project contains info on over **140.000** cities around the world.
 
 ## Base Endpoint
 
