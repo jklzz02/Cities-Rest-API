@@ -12,8 +12,9 @@ class CitiesController extends Controller
 {
     protected CitiesTableGateway $gateway;
     protected Response $response;
+    protected Validator $validator;
 
-    public function __construct(CitiesTableGateway $gateway, Response $response)
+    public function __construct(CitiesTableGateway $gateway, Response $response, Validator $validator)
     {
         $this->gateway = $gateway;
         $this->response = $response;
@@ -24,7 +25,7 @@ class CitiesController extends Controller
         $params = $request->getQuery();
 
         $result = match(true){
-            Validator::integer($params['id'] ?? false) => $this->gateway->find($params['id']),
+            $this->validateId($params['id'] ?? false) => $this->gateway->find($params['id']),
             !empty($params) && !key_exists('id', $params) => $this->gateway->findAll($params),
             default => null
         };
@@ -38,9 +39,7 @@ class CitiesController extends Controller
     {
         $data = $request->getBody();
 
-        $missing = Validator::array($data, ['name', 'population', 'country', 'lat', 'lon']);
-        
-        if ($missing) $this->response->badRequest($missing);
+        $this->validateFields($data, ['name', 'population', 'country', 'lat', 'lon']);
         
         $this->gateway->insert($data);
         $this->response->created();
@@ -51,15 +50,14 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if (!Validator::integer($params['id'])) $this->response->badRequest("Invalid id");
-
+        $this->validateId($params["id"]);
 
         if(!$this->gateway->update($params['id'], $data)){
 
             $this->response->notFound("Cannot Update Resource");
         }
 
-        $this->gateway->update((int)$params['id'], $data);
+        $this->gateway->update($params['id'], $data);
         $this->response->success("Resource Upated");
 
     }
@@ -69,13 +67,9 @@ class CitiesController extends Controller
         $params = $request->getQuery();
         $data = $request->getBody();
 
-        if(!Validator::integer($params['id'] ?? false)){
-            $this->response->badRequest("Invalid id");
-        }
+        $this->validateId($params['id'] ?? false);
 
-        $missing = Validator::array($data, ['name', 'country', 'population', 'lat', 'lon']);
-
-        if ($missing) $this->response->badRequest($missing);
+        $this->validateFields($data, ['name', 'country', 'population', 'lat', 'lon']);
 
         if(!$this->gateway->update($params['id'], $data)){
 
@@ -89,7 +83,8 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        if (!Validator::integer($params['id'])) $this->response->badRequest("Invalid id");
+
+        $this->validateId($params['id'] ?? false);
 
         if (!$this->gateway->delete($params['id'])) {
 
@@ -98,6 +93,21 @@ class CitiesController extends Controller
 
 
         $this->response->success("Resource Deleted");
+    }
+
+    private function validateId(mixed $id): bool
+    {
+        if (!$this->validator->integer($id)) {
+            $this->response->badRequest("Invalid id");
+            return false;
+        }
+        return true;
+    }
+
+    private function validateFields(array $data, array $requiredFields): never
+    {
+        $missing = $this->validator->array($data, $requiredFields);
+        if ($missing) $this->response->badRequest($missing);
     }
 
 }

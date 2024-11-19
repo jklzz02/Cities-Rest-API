@@ -4,7 +4,7 @@ namespace Jklzz02\RestApi\Core;
 
 class Validator
 {
-    public static function integer(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
+    public function integer(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
     {
         if (!is_numeric($value) || (int)$value != $value){
             return false;
@@ -19,7 +19,7 @@ class Validator
         return true;
     }
 
-    public static function string(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
+    public function string(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
     {
         if (!is_string($value)){
             return false;
@@ -34,7 +34,7 @@ class Validator
         return true;
     }
 
-    public static function array(array $source, array $required): string
+    public function array(array $source, array $required): string
     {
         $missingKeys = array_diff($required, array_keys($source));
 
