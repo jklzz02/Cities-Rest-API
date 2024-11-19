@@ -6,7 +6,7 @@ class Validator
 {
     public function integer(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
     {
-        if (!is_numeric($value) || (int)$value != $value){
+        if(!is_numeric($value) || (int)$value != $value){
             return false;
         }
 
@@ -21,13 +21,13 @@ class Validator
 
     public function string(mixed $value, int $min = 0, int $max = PHP_INT_MAX): bool
     {
-        if (!is_string($value)){
+        if(!is_string($value)){
             return false;
         }
 
         $length = strlen($value);
 
-        if ($length < $min || $length > $max) {
+        if($length < $min || $length > $max){
             return false;
         }
 
@@ -38,7 +38,7 @@ class Validator
     {
         $missingKeys = array_diff($required, array_keys($source));
 
-        if (!empty($missingKeys)) {
+        if(!empty($missingKeys)){
             $missingKeysList = implode(', ', $missingKeys);
             return "Missing required parameter(s): {$missingKeysList}";
         }

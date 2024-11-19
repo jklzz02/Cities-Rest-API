@@ -96,13 +96,11 @@ class CitiesController extends Controller
         $this->response->success("Resource Deleted");
     }
 
-    private function validateId(mixed $id): bool
+    private function validateId(mixed $id): never
     {
         if (!$this->validator->integer($id)) {
             $this->response->badRequest("Invalid id");
-            return false;
         }
-        return true;
     }
 
     private function validateFields(array $data, array $requiredFields): never
