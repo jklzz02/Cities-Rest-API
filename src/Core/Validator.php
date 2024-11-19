@@ -34,7 +34,7 @@ class Validator
         return true;
     }
 
-    public static function array(array $source, array $required): ?string
+    public static function array(array $source, array $required): string
     {
         $missingKeys = array_diff($required, array_keys($source));
 
@@ -43,5 +43,6 @@ class Validator
             return "Missing required parameter(s): {$missingKeysList}";
         }
 
+        return "";
     }
 }

@@ -73,7 +73,7 @@ class CitiesController extends Controller
             $this->response->badRequest("Invalid id");
         }
 
-        $missing = Validator::array($params, ['name', 'country', 'population', 'lat', 'lon']);
+        $missing = Validator::array($data, ['name', 'country', 'population', 'lat', 'lon']);
 
         if ($missing) $this->response->badRequest($missing);
 
