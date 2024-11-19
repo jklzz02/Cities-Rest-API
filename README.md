@@ -201,7 +201,7 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ### Language Level and Dependencies
 
-To run the project is required PHP **8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries
+To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries
 
 #### Libraries
 
@@ -232,7 +232,28 @@ In the [sql](/sql) directory, there are schemas for different type of `SQL` supp
 
 #### Token Table
 
-The token table is meant for testing authentication for CRUD operation, you can generate your tokens and insert them in the database.
+The token table is meant for testing authentication for CRUD operation, you can generate your tokens and insert them in the database. Tokens can be generated using the [token generator](/bin/tokenGenerator) script.
+Make sure to give execute permission to the script
+
+**Linux/MacOS**
+
+```bash
+chmod +x bin/tokengenerator 
+```
+
+Now simply run the script with this command
+
+```bash
+./bin/tokenGenerator
+```
+
+**Windows**
+
+Assuming that **PHP 8.2** or higher is installed in the system
+
+```cmd
+php /bin/tokenGenerator
+```
 
 #### Cities Table
 

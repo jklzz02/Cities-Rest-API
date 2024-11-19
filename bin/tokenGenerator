@@ -1,0 +1,7 @@
+#!/usr/bin/php
+
+<?php
+
+$generator = new \Random\Engine\Secure();
+$randomizer = new \Random\Randomizer($generator);
+echo "Token: " . bin2hex($randomizer->getBytes(32)) . "\n";
