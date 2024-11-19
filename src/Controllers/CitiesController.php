@@ -18,6 +18,7 @@ class CitiesController extends Controller
     {
         $this->gateway = $gateway;
         $this->response = $response;
+        $this->validator = $validator;
     }
 
     protected function handleGet(Request $request): void
