@@ -3,7 +3,7 @@
 namespace Jklzz02\RestApi\Core;
 
 
-use Jklzz02\RestApi\interfaces\Controller;
+use Jklzz02\RestApi\Interfaces\Controller;
 use Jklzz02\RestApi\Middleware\Auth;
 use Jklzz02\RestApi\Middleware\MiddleWare;
 

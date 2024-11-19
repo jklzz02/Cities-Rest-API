@@ -11,7 +11,7 @@ class ExceptionHandler{
         $this->response = $response;
     }
 
-    public function handle(\Throwable $e) : never
+    public function handle(\Throwable $e): never
     {
         error_log($e);
 
