@@ -1,14 +1,14 @@
 <?php
 
 
-use Jklzz02\RestApi\controllers\CitiesController;
+use Jklzz02\RestApi\Controllers\CitiesController;
 use Jklzz02\RestApi\Core\App;
 use Jklzz02\RestApi\Core\Container;
 use Jklzz02\RestApi\Core\Database;
 use Jklzz02\RestApi\Core\ExceptionHandler;
 use Jklzz02\RestApi\Core\Request;
 use Jklzz02\RestApi\Core\Response;
-use Jklzz02\RestApi\gateways\CitiesTableGateway;
+use Jklzz02\RestApi\Gateways\CitiesTableGateway;
 use Jklzz02\RestApi\Middleware\Auth;
 
 $config = require BASE_PATH . "src/config.php";

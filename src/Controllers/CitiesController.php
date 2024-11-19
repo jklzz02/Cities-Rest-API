@@ -1,11 +1,11 @@
 <?php
 
-namespace Jklzz02\RestApi\controllers;
+namespace Jklzz02\RestApi\Controllers;
 
 use Jklzz02\RestApi\Core\Response;
-use \Jklzz02\RestApi\Core\Request;
-use Jklzz02\RestApi\gateways\CitiesTableGateway;
-use Jklzz02\RestApi\interfaces\Controller;
+use Jklzz02\RestApi\Core\Request;
+use Jklzz02\RestApi\Gateways\CitiesTableGateway;
+use Jklzz02\RestApi\Interfaces\Controller;
 
 class CitiesController extends Controller
 {

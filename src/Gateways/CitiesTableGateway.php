@@ -1,10 +1,10 @@
 <?php
 
-namespace Jklzz02\RestApi\gateways;
+namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
-use Jklzz02\RestApi\interfaces\Gateway;
+use Jklzz02\RestApi\Interfaces\Gateway;
 use PDO;
 
 class CitiesTableGateway implements Gateway

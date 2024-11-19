@@ -1,6 +1,6 @@
 <?php
 
-namespace Jklzz02\RestApi\interfaces;
+namespace Jklzz02\RestApi\Interfaces;
 
 
 use Jklzz02\RestApi\Core\Request;
