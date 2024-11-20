@@ -27,7 +27,7 @@ class ExceptionHandler{
                 break;
 
             case HTTPNotFoundException::class:
-                $this->responder->notFound($e->getMessage());
+                $this->responder->notFound();
                 break;
 
             case UnknownColumnException::class:

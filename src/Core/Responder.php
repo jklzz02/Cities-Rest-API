@@ -70,7 +70,7 @@ class Responder{
         $this->respond(ResponseStatus::FORBIDDEN, $message, $data);
     }
 
-    public function notFound(string $message = "Resource Not Found", array $data = []): never
+    public function notFound(string $message = "Not Found", array $data = []): never
     {
         $this->respond(ResponseStatus::NOT_FOUND, $message, $data);
     }

@@ -24,7 +24,7 @@ class Database
 
     protected function dsn(array $config) : string
     {
-        $type = $config["type"] ?? "sqlite";
+        $type = $config["type"];
 
         $dsn = match($type){
             "mysql", "pgsql" => "$type:host={$config['host']};port={$config['port']};dbname={$config['name']}",

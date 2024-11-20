@@ -30,8 +30,7 @@ class CitiesController extends Controller
            $result = $this->gateway->findAll($params);
         }
         
-
-        if(!isset($result)){
+        if(empty($result)){
             
             throw new HTTPNotFoundException();
         }
