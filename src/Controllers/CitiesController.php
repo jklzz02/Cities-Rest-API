@@ -59,7 +59,7 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->response->notFound("Cannot Update Resource");
+            $this->response->notFound("Cannot Update Resource Not Found");
         }
 
         $this->gateway->update($params['id'], $data);
@@ -78,7 +78,7 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->response->notFound("Cannot Update Resource");
+            $this->response->notFound("Cannot Update Resource Not Found");
         }
 
         $this->response->success("Resource Upated");
@@ -93,7 +93,7 @@ class CitiesController extends Controller
 
         if (!$this->gateway->delete($params['id'])) {
 
-            $this->response->notFound("Cannot Delete resource with ID: {$params['id']}. Not Found");
+            $this->response->notFound("Cannot Delete resource Not Found");
         }
 
 
