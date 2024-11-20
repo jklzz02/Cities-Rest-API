@@ -2,11 +2,10 @@
 
 namespace Jklzz02\RestApi\Controllers;
 
-use Jklzz02\RestApi\Core\Response;
 use Jklzz02\RestApi\Core\Request;
+use Jklzz02\RestApi\Core\Response;
 use Jklzz02\RestApi\Core\Validator;
 use Jklzz02\RestApi\Gateways\CitiesTableGateway;
-use Jklzz02\RestApi\Interfaces\Controller;
 
 class CitiesController extends Controller
 {
@@ -63,7 +62,7 @@ class CitiesController extends Controller
         }
 
         $this->gateway->update($params['id'], $data);
-        $this->response->success("Resource Upated");
+        $this->response->success("Resource Updated");
 
     }
 
@@ -81,7 +80,7 @@ class CitiesController extends Controller
             $this->response->notFound("Cannot Update Resource Not Found");
         }
 
-        $this->response->success("Resource Upated");
+        $this->response->success("Resource Updated");
     }
 
     protected function handleDelete(Request $request): void

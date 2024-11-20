@@ -4,10 +4,11 @@ namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
+use Jklzz02\RestApi\Exception\Gateway\UnknownColumnException;
 use Jklzz02\RestApi\Interfaces\GatewayInterface;
 use PDO;
 
-class CitiesTableGatewayInterface implements GatewayInterface
+class CitiesTableGateway implements GatewayInterface
 {
     protected PDO $connection;
     protected const array columns = ['name', 'lat', 'lon', 'population', 'country'];
@@ -81,7 +82,7 @@ class CitiesTableGatewayInterface implements GatewayInterface
     {
         $diff = array_diff(array_keys($data), static::columns);
         if ($diff) {
-            throw new \InvalidArgumentException("Unknown column(s): ". implode(",", $diff));
+            throw new UnknownColumnException("Unknown column(s): ". implode(",", $diff));
         }
     }
 

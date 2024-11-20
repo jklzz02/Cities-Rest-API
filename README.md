@@ -8,7 +8,7 @@ This is a learning project designed to explore REST APIs by creating one from sc
 http://domain/v1/cities
 ```
 
-This is the endopint to make the requests, retrieve cities information, update or delete data. The response will be in `JSON` format.
+This is the endpoint to make the requests, retrieve cities information, update or delete data. The response will be in `JSON` format.
 
 ## GET request
 
@@ -54,7 +54,7 @@ GET http://domain/v1/cities?city={your_city_name}
 ```
 
 Using this `URL` is possible to retrieve the information of all the cities that share the requested name.
-The search is case insensitive, it's not required to titleize the city name.
+The search is case-insensitive, it's not required to titleize the city name.
 
 #### Example request with name
 
@@ -142,7 +142,7 @@ It suffice to pass `lat` and `lon` as `query parameters`.
 GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 ```
 
-#### Example response with latitude and logitude
+#### Example response with latitude and longitude
 <details>
 <summary>View JSON Data</summary>
 
@@ -167,7 +167,7 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 
 It's possible to use more parameters to narrow the matching results
 
-#### Example request with mutliple parameters
+#### Example request with multiple parameters
 
 ```HTTP
 GET http://domain/v1/cities?name=rome&country=it
@@ -193,7 +193,7 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ```
 
->**NOTE** the search is case insensitive and the results have been narrowed to one.
+>**NOTE** the search is case-insensitive and the results have been narrowed to one.
 </details>
 
 
@@ -280,7 +280,7 @@ in the case of a `SQLite` database `database_name` will refer to its path, it wi
 database_name=subdir/your_database.sqlite3
 ```
 
-that's how the [Database](/src/Core/Database.php) class is gonna handle the dsn
+that's how the [Database](/src/Core/Database.php) class will handle the dsn
 
 ```PHP
 $dsn = "sqlite:" . BASE_PATH  . $config["name"];
@@ -289,12 +289,12 @@ $dsn = "sqlite:" . BASE_PATH  . $config["name"];
 #### .env example for MySQL/PostgreSQL database
 
 ```.env
-database_type=your_database_type # mysql/pgsql
-database_name=your_database_name
-database_host=localhost # or the IP address of your server
-database_port=3306 # or the port your MySQL/PostgreSQL server uses
-database_username=your_username
-database_password=your_password
+DB_TYPE=your_database_type # mysql/pgsql
+DB_NAME=your_database_name
+DB_HOST=localhost # or the IP address of your server
+DB_PORT=3306 # or the port your MySQL/PostgreSQL server uses
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 ```
 
->**NOTE** username and password aren not mandatory.
+>**NOTE** username and password are not mandatory.

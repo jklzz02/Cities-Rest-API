@@ -18,9 +18,9 @@ $container = new Container();
 
 $container->bind(Database::class, fn () => new Database($config["database"]));
 $container->bind(ExceptionHandler::class, fn () => new ExceptionHandler(new Response));
-$container->bind(Auth::class, fn () => new Auth(new Request, new Response, $container->resolve(Database::class)));
-$container->bind(CitiesTableGateway::class, fn () => new CitiesTableGateway($container->resolve(Database::class)));
-$container->bind(CitiesController::class, fn () => new CitiesController($container->resolve(CitiesTableGateway::class), new Response, new Validator));
+$container->bind(Auth::class, fn () => new Auth(new Request, new Response, $container->get(Database::class)));
+$container->bind(CitiesTableGateway::class, fn () => new CitiesTableGateway($container->get(Database::class)));
+$container->bind(CitiesController::class, fn () => new CitiesController($container->get(CitiesTableGateway::class), new Response, new Validator));
 
 
 App::setContainer($container);

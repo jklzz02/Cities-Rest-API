@@ -1,6 +1,6 @@
 <?php
 
-namespace Jklzz02\RestApi\Exception;
+namespace Jklzz02\RestApi\Exception\Container;
 
 use Throwable;
 

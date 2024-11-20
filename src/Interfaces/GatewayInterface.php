@@ -5,7 +5,7 @@ namespace Jklzz02\RestApi\Interfaces;
 
 use Jklzz02\RestApi\Core\Database;
 
-interface Gateway
+interface GatewayInterface
 {
     public function __construct(Database $database);
     public function find(int $id): ?array;

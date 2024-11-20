@@ -2,7 +2,10 @@
 
 namespace Jklzz02\RestApi\Core;
 
-class Container{
+use Jklzz02\RestApi\Exception\Container\NotFoundException;
+use Jklzz02\RestApi\Interfaces\ContainerInterface;
+
+class Container implements ContainerInterface {
 
     protected array $bindings=[];
 
@@ -11,12 +14,11 @@ class Container{
         $this->bindings[$key] = $resolver;
     }
 
-    public function resolve(string $key){
+    public function get(string $key): object
+    {
 
         if (!array_key_exists($key, $this->bindings)){
-
-            throw new \Exception("No matching binding found for '$key'");
-
+            throw new NotFoundException("No matching binding found for '$key'");
         }
 
         $resolver = $this->bindings[$key];
@@ -24,7 +26,12 @@ class Container{
 
     }
 
-    public function getBindings():array
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->bindings);
+    }
+
+    public function getBindings(): array
     {
         return $this->bindings;
     }

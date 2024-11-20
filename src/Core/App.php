@@ -18,7 +18,7 @@ class App {
 
     public static function resolve(string $key):object
     {
-       return App::$container->resolve($key);
+       return App::$container->get($key);
     }
 
 }

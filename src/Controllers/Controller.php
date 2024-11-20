@@ -1,6 +1,6 @@
 <?php
 
-namespace Jklzz02\RestApi\Interfaces;
+namespace Jklzz02\RestApi\Controllers;
 
 
 use Jklzz02\RestApi\Core\Request;
@@ -30,7 +30,7 @@ abstract class Controller
 
     protected abstract function handleGet(Request $request): void;
     protected abstract function handlePost(Request $request): void;
-    protected abstract function handlePatch(Request $reuqest) :void;
+    protected abstract function handlePatch(Request $request) :void;
     protected abstract function handlePut(Request $request): void;
     protected abstract function handleDelete(Request $request): void;
 

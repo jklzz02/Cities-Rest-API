@@ -3,14 +3,14 @@
 namespace Jklzz02\RestApi\Core;
 
 
-use Jklzz02\RestApi\Interfaces\Controller;
+use Jklzz02\RestApi\Controllers\Controller;
 use Jklzz02\RestApi\Middleware\Auth;
 use Jklzz02\RestApi\Middleware\MiddleWare;
 
 class Router
 {
     protected array $routes = [];
-    public const int DEFAULT_ERRORE_CODE = 404;
+    public const int DEFAULT_ERROR_CODE = 404;
     public const string DEFAULT_ERROR_MESSAGE = "Resource Not Found";
 
     public function add(string $method, string $path, Controller $controller) :static
@@ -53,7 +53,7 @@ class Router
             }
         }
 
-        $this->abort(static::DEFAULT_ERRORE_CODE, static::DEFAULT_ERROR_MESSAGE);
+        $this->abort(static::DEFAULT_ERROR_CODE, static::DEFAULT_ERROR_MESSAGE);
     }
 
     private function abort(int $status, string $message): void
