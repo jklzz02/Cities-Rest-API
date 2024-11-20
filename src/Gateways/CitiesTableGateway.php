@@ -4,10 +4,10 @@ namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
-use Jklzz02\RestApi\Interfaces\Gateway;
+use Jklzz02\RestApi\Interfaces\GatewayInterface;
 use PDO;
 
-class CitiesTableGateway implements Gateway
+class CitiesTableGatewayInterface implements GatewayInterface
 {
     protected PDO $connection;
     protected const array columns = ['name', 'lat', 'lon', 'population', 'country'];
