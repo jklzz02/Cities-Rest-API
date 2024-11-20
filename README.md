@@ -266,18 +266,18 @@ In the dotenv it is possible to specify the type of database to use, make sure t
 #### .env example for a SQLite database
 
 ```.env
-database_type=sqlite
-database_name=your_database.sqlite3
-database_host=
-database_port=
-database_username=
-database_password=
+DB-TYPE=sqlite
+DB_NAME=your_database.sqlite3
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
 ```
 
-in the case of a `SQLite` database `database_name` will refer to its path, it will be joined with the root path of the project directory, so it's also possible to indicate a subdirectory.
+in the case of a `SQLite` database `DB_NAME` will refer to its path, it will be joined with the root path of the project directory, so it's also possible to indicate a subdirectory.
 
 ```.env
-database_name=subdir/your_database.sqlite3
+DB_NAME=subdir/your_database.sqlite3
 ```
 
 that's how the [Database](/src/Core/Database.php) class will handle the dsn
