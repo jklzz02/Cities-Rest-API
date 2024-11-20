@@ -37,7 +37,7 @@ class CitiesController extends Controller
 
         if(!isset($result)) $this->response->notFound();
 
-        $this->response->success("Resource Retrieved", $result);
+        $this->response->success(data: $result);
     }
 
     protected function handlePost(Request $request): void
