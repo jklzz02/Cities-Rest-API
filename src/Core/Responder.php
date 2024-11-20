@@ -2,7 +2,7 @@
 
 namespace Jklzz02\RestApi\Core;
 
-class Response{
+class Responder{
 
     public const int SUCCESS = 200;
     public const int CREATED = 201;

@@ -6,11 +6,8 @@ use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 
 class ExceptionHandler{
 
-    protected Response $response;
-
-    public function __construct(Response $response)
+    public function __construct(protected Responder $responder)
     {
-        $this->response = $response;
     }
 
     public function handle(\Throwable $e): never
@@ -20,11 +17,11 @@ class ExceptionHandler{
         switch (get_class($e)) {
 
             case UnknownColumnException::class:
-                $this->response->badRequest();
+                $this->responder->badRequest();
                 break;
 
             default:
-                $this->response->internalError();
+                $this->responder->internalError();
                 break;
         }
     }

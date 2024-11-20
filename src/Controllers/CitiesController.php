@@ -3,21 +3,16 @@
 namespace Jklzz02\RestApi\Controllers;
 
 use Jklzz02\RestApi\Core\Request;
-use Jklzz02\RestApi\Core\Response;
+use Jklzz02\RestApi\Core\Responder;
 use Jklzz02\RestApi\Core\Validator;
 use Jklzz02\RestApi\Gateways\CitiesTableGateway;
 
 class CitiesController extends Controller
 {
-    protected CitiesTableGateway $gateway;
-    protected Response $response;
-    protected Validator $validator;
-
-    public function __construct(CitiesTableGateway $gateway, Response $response, Validator $validator)
+    public function __construct(protected CitiesTableGateway $gateway,
+                                protected Responder $responder,
+                                protected Validator $validator)
     {
-        $this->gateway = $gateway;
-        $this->response = $response;
-        $this->validator = $validator;
     }
 
     protected function handleGet(Request $request): void
@@ -34,9 +29,9 @@ class CitiesController extends Controller
         }
         
 
-        if(!isset($result)) $this->response->notFound();
+        if(!isset($result)) $this->responder->notFound();
 
-        $this->response->success(data: $result);
+        $this->responder->success(data: $result);
     }
 
     protected function handlePost(Request $request): void
@@ -46,7 +41,7 @@ class CitiesController extends Controller
         $this->validateFields($data, ['name', 'population', 'country', 'lat', 'lon']);
         
         $this->gateway->insert($data);
-        $this->response->created();
+        $this->responder->created();
     }
 
     protected function handlePatch(Request $request): void
@@ -58,11 +53,11 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->response->notFound("Cannot Update Resource Not Found");
+            $this->responder->notFound("Cannot Update Resource Not Found");
         }
 
         $this->gateway->update($params['id'], $data);
-        $this->response->success("Resource Updated");
+        $this->responder->success("Resource Updated");
 
     }
 
@@ -77,10 +72,10 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->response->notFound("Cannot Update Resource Not Found");
+            $this->responder->notFound("Cannot Update Resource Not Found");
         }
 
-        $this->response->success("Resource Updated");
+        $this->responder->success("Resource Updated");
     }
 
     protected function handleDelete(Request $request): void
@@ -92,24 +87,24 @@ class CitiesController extends Controller
 
         if (!$this->gateway->delete($params['id'])) {
 
-            $this->response->notFound("Cannot Delete resource Not Found");
+            $this->responder->notFound("Cannot Delete resource Not Found");
         }
 
 
-        $this->response->success("Resource Deleted");
+        $this->responder->success("Resource Deleted");
     }
 
     private function validateId(mixed $id): void
     {
         if (!$this->validator->integer($id)) {
-            $this->response->badRequest("Invalid id");
+            $this->responder->badRequest("Invalid id");
         }
     }
 
     private function validateFields(array $data, array $requiredFields): void
     {
         $missing = $this->validator->array($data, $requiredFields);
-        if ($missing) $this->response->badRequest($missing);
+        if ($missing) $this->responder->badRequest($missing);
     }
 
 }

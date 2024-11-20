@@ -5,16 +5,16 @@ namespace Jklzz02\RestApi\Middleware;
 
 use Jklzz02\RestApi\Core\Database;
 use Jklzz02\RestApi\Core\Request;
-use Jklzz02\RestApi\Core\Response;
+use Jklzz02\RestApi\Core\Responder;
 use PDO;
 
 class Auth{
 
     protected PDO $connection;
     protected string $token;
-    protected Response $response;
+    protected Responder $response;
 
-    public function __construct(Request $request, Response $response, Database $db)
+    public function __construct(Request $request, Responder $response, Database $db)
     {
         $this->connection = $db->getConnection();
         $this->token = $request->token();
