@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Core;
 
 
 use Jklzz02\RestApi\Controllers\Controller;
+use Jklzz02\RestApi\Enum\HTTPMethod;
 use Jklzz02\RestApi\Middleware\Auth;
 use Jklzz02\RestApi\Middleware\MiddleWare;
 
@@ -13,15 +14,13 @@ class Router
     public const int DEFAULT_ERROR_CODE = 404;
     public const string DEFAULT_ERROR_MESSAGE = "Resource Not Found";
 
-    public function add(string $method, string $path, Controller $controller) :static
+    public function add(HTTPMethod $method, string $path, Controller $controller) :static
     {
         $this->routes[] = [
-
-            "method" => $method,
+            "method" => $method->value,
             "path" => $path,
             "controller" => $controller,
             "middleware" => null
-
         ];
 
         return $this;
@@ -40,7 +39,6 @@ class Router
 
 
         foreach($this->routes as $route){
-
             if($route["method"] === $method && $route["path"] === $path){
 
                 if($route["middleware"] ?? false){

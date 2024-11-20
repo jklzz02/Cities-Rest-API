@@ -2,16 +2,9 @@
 
 namespace Jklzz02\RestApi\Core;
 
-class Responder{
+use Jklzz02\RestApi\Enum\ResponseStatus;
 
-    public const int SUCCESS = 200;
-    public const int CREATED = 201;
-    public const int NO_CONTENT =204;
-    public const int BAD_REQUEST = 400;
-    public const int UNAUTHORIZED = 401;
-    public const int FORBIDDEN = 403;
-    public const int NOT_FOUND = 404;
-    public const int INTERNAL_ERROR = 500;
+class Responder{
 
     public function __construct() 
     {
@@ -28,10 +21,9 @@ class Responder{
         header("Expires: 0");
     }
 
-    public function respond(int $status, string $message, array $data = []) : never
+    public function respond(ResponseStatus $status, string $message, array $data = []) : never
     {
-
-        http_response_code($status);
+        http_response_code($status->value);
 
         $response = match (true) {
             empty($data) => [
@@ -50,41 +42,41 @@ class Responder{
 
     public function success(string $message = "Resource Retrieved", array $data = []): never
     {
-        $this->respond(self::SUCCESS, $message, $data);
+        $this->respond(ResponseStatus::SUCCESS, $message, $data);
     }
 
     public function created(string $message = "Resource Created", array $data = []): never
     {
-        $this->respond(self::CREATED, $message, $data);
+        $this->respond(ResponseStatus::CREATED, $message, $data);
     }
 
     public function noContent(string $message = "No Content"): never
     {
-        $this->respond(self::NO_CONTENT, $message);
+        $this->respond(ResponseStatus::NO_CONTENT, $message);
     }
 
     public function badRequest(string $message = "Bad Request", array $data = []): never
     {
-        $this->respond(self::BAD_REQUEST, $message, $data);
+        $this->respond(ResponseStatus::BAD_REQUEST, $message, $data);
     }
 
     public function unauthorized(string $message = "Unauthorized Access", array $data = []): never
     {
-        $this->respond(self::UNAUTHORIZED, $message, $data);
+        $this->respond(ResponseStatus::UNAUTHORIZED, $message, $data);
     }
 
     public function forbidden(string $message = "Forbidden", array $data = []): never
     {
-        $this->respond(self::FORBIDDEN, $message, $data);
+        $this->respond(ResponseStatus::FORBIDDEN, $message, $data);
     }
 
     public function notFound(string $message = "Resource Not Found", array $data = []): never
     {
-        $this->respond(self::NOT_FOUND, $message, $data);
+        $this->respond(ResponseStatus::NOT_FOUND, $message, $data);
     }
 
     public function internalError(string $message = "Internal Server Error", array $data = []): never
     {
-        $this->respond(self::INTERNAL_ERROR, $message, $data);
+        $this->respond(ResponseStatus::INTERNAL_ERROR, $message, $data);
     }
 }

@@ -8,7 +8,7 @@ if (file_exists(BASE_PATH . '.env')) {
 
 return [
     "database" => [
-        "type" => $_ENV["DB_type"],
+        "type" => $_ENV["DB_TYPE"],
         "host" => $_ENV["DB_HOST"],
         "port" => $_ENV["DB_PORT"],
         "name" => $_ENV["DB_NAME"],

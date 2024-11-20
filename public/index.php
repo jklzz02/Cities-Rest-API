@@ -7,6 +7,7 @@ use Jklzz02\RestApi\Core\App;
 use Jklzz02\RestApi\Core\ExceptionHandler;
 use Jklzz02\RestApi\Core\Request;
 use Jklzz02\RestApi\Core\Router;
+use Jklzz02\RestApi\Enum\HTTPMethod;
 
 const BASE_PATH = __DIR__ . "/../";
 require_once BASE_PATH . "vendor/autoload.php";
@@ -21,10 +22,10 @@ $router = new Router();
 
 $citiesController = App::resolve(CitiesController::class);
 
-$router->add('GET', '/v1/cities', $citiesController);
-$router->add('POST', '/v1/cities', $citiesController)->auth();
-$router->add('PATCH', '/v1/cities', $citiesController)->auth();
-$router->add('PUT', '/v1/cities', $citiesController)->auth();
-$router->add('DELETE', '/v1/cities', $citiesController)->auth();
+$router->add(HTTPMethod::GET, '/v1/cities', $citiesController);
+$router->add(HTTPMethod::POST, '/v1/cities', $citiesController)->auth();
+$router->add(HTTPMethod::PATCH, '/v1/cities', $citiesController)->auth();
+$router->add(HTTPMethod::PUT, '/v1/cities', $citiesController)->auth();
+$router->add(HTTPMethod::DELETE, '/v1/cities', $citiesController)->auth();
 
 $router->dispatch($request);

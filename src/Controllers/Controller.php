@@ -4,26 +4,28 @@ namespace Jklzz02\RestApi\Controllers;
 
 
 use Jklzz02\RestApi\Core\Request;
+use Jklzz02\RestApi\Enum\HTTPMethod;
 
 abstract class Controller
 {
     public function handle(Request $request): void
     {
-        switch($request->getMethod()){
-            case "GET":
+        switch (HTTPMethod::from($request->getMethod())) {
+            case HTTPMethod::GET:
                 $this->handleGet($request);
                 break;
-            case "POST":
+            case HTTPMethod::POST:
                 $this->handlePost($request);
                 break;
-            case "PATCH":
+            case HTTPMethod::PATCH:
                 $this->handlePatch($request);
-            case "PUT":
+                break;
+            case HTTPMethod::PUT:
                 $this->handlePut($request);
                 break;
-            case "DELETE":
+            case HTTPMethod::DELETE:
                 $this->handleDelete($request);
-                break;   
+                break;
         }
 
     }
