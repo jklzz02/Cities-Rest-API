@@ -2,7 +2,7 @@
 
 namespace Jklzz02\RestApi\Core;
 
-use Jklzz02\RestApi\Exception\Gateway\UnknownColumnsException;
+use Jklzz02\RestApi\Exception\Gateway\UnknownColumnException;
 
 class ExceptionHandler{
 
@@ -19,7 +19,7 @@ class ExceptionHandler{
 
         switch (get_class($e)) {
 
-            case UnknownColumnsException::class:
+            case UnknownColumnException::class:
                 $this->response->badRequest();
                 break;
 
