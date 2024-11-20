@@ -16,8 +16,6 @@ $exceptionHandler = App::resolve(ExceptionHandler::class);
 
 set_exception_handler([$exceptionHandler, "handle"]);
 
-header("content-type: application/json");
-
 $request = new Request();
 $router = new Router();
 

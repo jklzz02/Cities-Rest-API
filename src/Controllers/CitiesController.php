@@ -25,13 +25,17 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        $result = match(true){
-            $this->validateId($params['id'] ?? false) => $this->gateway->find($params['id']),
-            !empty($params) && !key_exists('id', $params) => $this->gateway->findAll($params),
-            default => null
-        };
+        if(isset($params["id"])){
+            $this->validateId($params['id']);
+            $result = $this->gateway->find($params['id']);
+        }
+        
+        if(!empty($params) && !key_exists('id', $params)){
+           $result = $this->gateway->findAll($params);
+        }
+        
 
-        if(!$result) $this->response->notFound();
+        if(!isset($result)) $this->response->notFound();
 
         $this->response->success("Resource Retrieved", $result);
     }
@@ -96,14 +100,14 @@ class CitiesController extends Controller
         $this->response->success("Resource Deleted");
     }
 
-    private function validateId(mixed $id): never
+    private function validateId(mixed $id): void
     {
         if (!$this->validator->integer($id)) {
             $this->response->badRequest("Invalid id");
         }
     }
 
-    private function validateFields(array $data, array $requiredFields): never
+    private function validateFields(array $data, array $requiredFields): void
     {
         $missing = $this->validator->array($data, $requiredFields);
         if ($missing) $this->response->badRequest($missing);

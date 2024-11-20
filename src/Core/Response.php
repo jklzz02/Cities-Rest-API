@@ -13,6 +13,21 @@ class Response{
     public const int NOT_FOUND = 404;
     public const int INTERNAL_ERROR = 500;
 
+    public function __construct() 
+    {
+        header("Content-Type: application/json");
+        header("X-Content-Type-Options: nosniff");
+
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+        header("X-Frame-Options: DENY");
+        header("X-XSS-Protection: 1; mode=block");
+
+        header("Expires: 0");
+    }
+
     public function respond(int $status, string $message, array $data = []) : never
     {
 
