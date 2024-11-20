@@ -2,7 +2,7 @@
 
 namespace Jklzz02\RestApi\Core;
 
-use Jklzz02\RestApi\Exception\Gateway\UnknownColumnException;
+use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 
 class ExceptionHandler{
 

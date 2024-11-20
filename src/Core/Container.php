@@ -2,14 +2,14 @@
 
 namespace Jklzz02\RestApi\Core;
 
-use Jklzz02\RestApi\Exception\Container\NotFoundException;
+use Jklzz02\RestApi\Exception\ContainerException\NotFoundException;
 use Jklzz02\RestApi\Interfaces\ContainerInterface;
 
 class Container implements ContainerInterface {
 
     protected array $bindings=[];
 
-    public function bind(string $key, callable $resolver):void
+    public function set(string $key, callable $resolver):void
     {
         $this->bindings[$key] = $resolver;
     }
@@ -29,11 +29,6 @@ class Container implements ContainerInterface {
     public function has(string $key): bool
     {
         return array_key_exists($key, $this->bindings);
-    }
-
-    public function getBindings(): array
-    {
-        return $this->bindings;
     }
 
 }

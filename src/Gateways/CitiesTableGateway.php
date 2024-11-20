@@ -4,7 +4,7 @@ namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
-use Jklzz02\RestApi\Exception\Gateway\UnknownColumnException;
+use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 use Jklzz02\RestApi\Interfaces\GatewayInterface;
 use PDO;
 

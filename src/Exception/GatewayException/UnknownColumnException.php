@@ -1,8 +1,8 @@
 <?php
 
-namespace Jklzz02\RestApi\Exception\Gateway;
+namespace Jklzz02\RestApi\Exception\GatewayException;
 
-use Jklzz02\RestApi\Exception\Gateway\GatewayException;
+use Jklzz02\RestApi\Exception\GatewayException\GatewayException;
 use Throwable;
 
 class UnknownColumnException extends GatewayException{

@@ -16,11 +16,11 @@ $config = require BASE_PATH . "src/config.php";
 
 $container = new Container();
 
-$container->bind(Database::class, fn () => new Database($config["database"]));
-$container->bind(ExceptionHandler::class, fn () => new ExceptionHandler(new Response));
-$container->bind(Auth::class, fn () => new Auth(new Request, new Response, $container->get(Database::class)));
-$container->bind(CitiesTableGateway::class, fn () => new CitiesTableGateway($container->get(Database::class)));
-$container->bind(CitiesController::class, fn () => new CitiesController($container->get(CitiesTableGateway::class), new Response, new Validator));
+$container->set(Database::class, fn () => new Database($config["database"]));
+$container->set(ExceptionHandler::class, fn () => new ExceptionHandler(new Response));
+$container->set(Auth::class, fn () => new Auth(new Request, new Response, $container->get(Database::class)));
+$container->set(CitiesTableGateway::class, fn () => new CitiesTableGateway($container->get(Database::class)));
+$container->set(CitiesController::class, fn () => new CitiesController($container->get(CitiesTableGateway::class), new Response, new Validator));
 
 
 App::setContainer($container);

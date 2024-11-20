@@ -10,10 +10,9 @@ class Database
 
     public function __construct(array $config)
     {
-        $dsn = $this->dsn($config);
 
         $this->connection = new PDO(
-            $dsn,
+            $this->dsn($config),
             $config["username"] ?? '',
             $config["password"] ?? '',
             [
@@ -23,7 +22,7 @@ class Database
         );
     }
 
-    protected function dsn($config) : string
+    protected function dsn(array $config) : string
     {
         $type = $config["type"] ?? "sqlite";
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jklzz02\RestApi\Exception\Gateway;
+namespace Jklzz02\RestApi\Exception\GatewayException;
 
 use Throwable;
 
