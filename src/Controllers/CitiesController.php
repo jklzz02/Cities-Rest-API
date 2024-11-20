@@ -5,6 +5,8 @@ namespace Jklzz02\RestApi\Controllers;
 use Jklzz02\RestApi\Core\Request;
 use Jklzz02\RestApi\Core\Responder;
 use Jklzz02\RestApi\Core\Validator;
+use Jklzz02\RestApi\Exception\HTTPException\HTTPBadRequestException;
+use Jklzz02\RestApi\Exception\HTTPException\HTTPNotFoundException;
 use Jklzz02\RestApi\Gateways\CitiesTableGateway;
 
 class CitiesController extends Controller
@@ -29,7 +31,10 @@ class CitiesController extends Controller
         }
         
 
-        if(!isset($result)) $this->responder->notFound();
+        if(!isset($result)){
+            
+            throw new HTTPNotFoundException();
+        }
 
         $this->responder->success(data: $result);
     }
@@ -53,7 +58,7 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->responder->notFound("Cannot Update Resource Not Found");
+            throw new HTTPNotFoundException("Cannot Update Resource Not Found");
         }
 
         $this->gateway->update($params['id'], $data);
@@ -72,7 +77,7 @@ class CitiesController extends Controller
 
         if(!$this->gateway->update($params['id'], $data)){
 
-            $this->responder->notFound("Cannot Update Resource Not Found");
+            throw new HTTPNotFoundException("Cannot Update Resource Not Found");
         }
 
         $this->responder->success("Resource Updated");
@@ -87,7 +92,7 @@ class CitiesController extends Controller
 
         if (!$this->gateway->delete($params['id'])) {
 
-            $this->responder->notFound("Cannot Delete resource Not Found");
+            throw new HTTPNotFoundException("Cannot Delete resource Not Found");
         }
 
 
@@ -97,14 +102,17 @@ class CitiesController extends Controller
     private function validateId(mixed $id): void
     {
         if (!$this->validator->integer($id)) {
-            $this->responder->badRequest("Invalid id");
+            
+            throw new HTTPBadRequestException("Invalid id");
         }
     }
 
     private function validateFields(array $data, array $requiredFields): void
     {
         $missing = $this->validator->array($data, $requiredFields);
-        if ($missing) $this->responder->badRequest($missing);
+        if ($missing){
+            throw new HTTPBadRequestException($missing);
+        }
     }
 
 }
