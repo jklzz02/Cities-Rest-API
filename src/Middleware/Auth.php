@@ -12,13 +12,13 @@ class Auth{
 
     protected PDO $connection;
     protected string $token;
-    protected Responder $response;
+    protected Responder $responder;
 
-    public function __construct(Request $request, Responder $response, Database $db)
+    public function __construct(Request $request, Responder $responder, Database $db)
     {
         $this->connection = $db->getConnection();
         $this->token = $request->token();
-        $this->response = $response;
+        $this->responder = $responder;
     }
 
     public function handle(): void
@@ -27,7 +27,7 @@ class Auth{
         $stmt->execute([":token" => $this->token]);
 
         if(!$stmt->fetch()){
-            $this->response->unauthorized();
+            $this->responder->unauthorized();
         }
 
     }
