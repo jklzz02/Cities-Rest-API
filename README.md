@@ -1,6 +1,6 @@
 # Cities Rest API
 
-This is a learning project designed to explore REST APIs by creating one from scratch, supporting CRUD operations and authentication via tokens. The database used in the project contains information on over 140,000 cities around the world.
+This is a learning project to explore REST APIs by creating one from scratch, supporting CRUD operations and authentication via tokens. The database used in the project contains information on over 140,000 cities around the world.
 
 ## Base Endpoint
 
@@ -241,7 +241,7 @@ Make sure to give execute permission to the script
 chmod +x bin/tokengenerator 
 ```
 
-Now simply run the script with this command
+Now simply run the script with this command  to generate a sample Token
 
 ```bash
 ./bin/tokenGenerator
@@ -257,7 +257,7 @@ php /bin/tokenGenerator
 
 #### Cities Table
 
-If you've created the database successfully it will suffice to run the [seed](/sql/cities_seed.sql) script to populate the database of all the cities in the dataset.
+If you've created the database successfully it will suffice to run the [seed](/sql/cities_seed.sql) script to populate the database with a sample of 100 cities.
 
 ### Config and .env Setup
 
