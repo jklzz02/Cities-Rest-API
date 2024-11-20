@@ -19,8 +19,6 @@ set_exception_handler([$exceptionHandler, "handle"]);
 $request = new Request();
 $router = new Router();
 
-(new \Jklzz02\RestApi\Core\Container())->get("foo");
-
 $citiesController = App::resolve(CitiesController::class);
 
 $router->add('GET', '/v1/cities', $citiesController);
