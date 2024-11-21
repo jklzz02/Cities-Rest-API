@@ -47,6 +47,15 @@ class Request{
         return $this->body;
     }
 
+    public function getIpAddress() :string
+    {     
+        return 
+        $_SERVER['HTTP_CLIENT_IP'] ??
+        explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '')[0] ?: null ??
+        $_SERVER['REMOTE_ADDR'] ??
+        '0.0.0.0';
+    }
+
     public function token() : ?string
     {
         return $this->queryParams['appid'] ?? '';

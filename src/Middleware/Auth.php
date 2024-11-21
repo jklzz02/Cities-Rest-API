@@ -23,7 +23,7 @@ class Auth{
         $stmt->execute([":token" => $this->request->token()]);
 
         if(!$stmt->fetch()){
-            throw new HTTPUnauthorizedException();
+            throw new HTTPUnauthorizedException("Unauthorized Attempt from {$this->request->getIpAddress()}");
         }
 
     }

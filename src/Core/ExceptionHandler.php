@@ -23,6 +23,7 @@ class ExceptionHandler{
                 break;
 
             case HTTPUnauthorizedException::class:
+                error_log("WARNING: " . $e->getMessage());
                 $this->responder->unauthorized();
                 break;
 
@@ -31,6 +32,7 @@ class ExceptionHandler{
                 break;
 
             case UnknownColumnException::class:
+                error_log("WARNING: " . $e->getMessage());
                 $this->responder->badRequest();
                 break;
 
