@@ -12,7 +12,7 @@ use PDO;
 class CitiesTableGateway implements GatewayInterface
 {
     protected PDO $connection;
-    protected const array ALLOWED_COLUMNS = ['name', 'lat', 'lon', 'population', 'country'];
+    public const array ALLOWED_COLUMNS = ['id', 'name', 'lat', 'lon', 'population', 'country'];
 
     public function __construct(Database $database)
     {

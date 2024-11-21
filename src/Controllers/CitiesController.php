@@ -21,14 +21,11 @@ class CitiesController extends Controller
     {
         $params = $request->getQuery();
 
-        if(isset($params["id"])){
-            $this->validateId($params['id']);
-            $result = $this->gateway->find($params['id']);
+        if($params["id"] ?? false){
+            $this->validateId($params["id"]);
         }
-        
-        if(!empty($params) && !key_exists('id', $params)){
-           $result = $this->gateway->findAll($params);
-        }
+
+        $result = $this->gateway->findAll($params);
         
         if(empty($result)){
             
@@ -42,7 +39,7 @@ class CitiesController extends Controller
     {
         $data = $request->getBody();
 
-        $this->validateFields($data, ['name', 'population', 'country', 'lat', 'lon']);
+        $this->validateFields($data, $this->gateway::ALLOWED_COLUMNS);
         
         $this->gateway->insert($data);
         $this->responder->created();
@@ -67,7 +64,7 @@ class CitiesController extends Controller
 
         $this->validateId($params['id'] ?? false);
 
-        $this->validateFields($data, ['name', 'country', 'population', 'lat', 'lon']);
+        $this->validateFields($data, $this->gateway::ALLOWED_COLUMNS);
 
         $this->gateway->update($params['id'], $data);
         $this->responder->success("Resource Updated");
