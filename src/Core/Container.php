@@ -9,7 +9,7 @@ class Container implements ContainerInterface {
 
     protected array $bindings=[];
 
-    public function set(string $key, callable $resolver):void
+    public function set(string $key, callable $resolver): void
     {
         $this->bindings[$key] = $resolver;
     }

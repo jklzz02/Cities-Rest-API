@@ -42,7 +42,6 @@ class ExceptionHandler{
                 break;
 
             default:
-            
                 error_log($e);
                 $this->responder->internalError();
                 break;

@@ -31,7 +31,7 @@ class Router
        $this->routes[$route]["middleware"] = Auth::class; 
     }
 
-    public function dispatch(Request $request): void
+    public function dispatch(Request $request): never
     {
         $method = $request->getMethod();
         $path = $request->getPath();

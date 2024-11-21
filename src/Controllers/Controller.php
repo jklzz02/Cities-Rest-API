@@ -8,7 +8,7 @@ use Jklzz02\RestApi\Enum\HTTPMethod;
 
 abstract class Controller
 {
-    public function handle(Request $request): void
+    public function handle(Request $request): never
     {
         switch (HTTPMethod::from($request->getMethod())) {
 
@@ -35,10 +35,10 @@ abstract class Controller
 
     }
 
-    protected abstract function handleGet(Request $request): void;
-    protected abstract function handlePost(Request $request): void;
-    protected abstract function handlePatch(Request $request) :void;
-    protected abstract function handlePut(Request $request): void;
-    protected abstract function handleDelete(Request $request): void;
+    protected abstract function handleGet(Request $request): never;
+    protected abstract function handlePost(Request $request): never;
+    protected abstract function handlePatch(Request $request) :never;
+    protected abstract function handlePut(Request $request): never;
+    protected abstract function handleDelete(Request $request): never;
 
 }

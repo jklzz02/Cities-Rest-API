@@ -17,7 +17,7 @@ class CitiesController extends Controller
     {
     }
 
-    protected function handleGet(Request $request): void
+    protected function handleGet(Request $request): never
     {
         $params = $request->getQuery();
 
@@ -35,7 +35,7 @@ class CitiesController extends Controller
         $this->responder->success(data: $result);
     }
 
-    protected function handlePost(Request $request): void
+    protected function handlePost(Request $request): never
     {
         $data = $request->getBody();
 
@@ -45,7 +45,7 @@ class CitiesController extends Controller
         $this->responder->created();
     }
 
-    protected function handlePatch(Request $request): void
+    protected function handlePatch(Request $request): never
     {
         $params = $request->getQuery();
         $data = $request->getBody();
@@ -57,7 +57,7 @@ class CitiesController extends Controller
 
     }
 
-    protected function handlePut(Request $request): void
+    protected function handlePut(Request $request): never
     {
         $params = $request->getQuery();
         $data = $request->getBody();
@@ -70,7 +70,7 @@ class CitiesController extends Controller
         $this->responder->success("Resource Updated");
     }
 
-    protected function handleDelete(Request $request): void
+    protected function handleDelete(Request $request): never
     {
         $params = $request->getQuery();
 
