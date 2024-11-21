@@ -11,7 +11,7 @@ use PDO;
 class CitiesTableGateway implements GatewayInterface
 {
     protected PDO $connection;
-    protected const array columns = ['name', 'lat', 'lon', 'population', 'country'];
+    protected const array ALLOWED_COLUMNS = ['name', 'lat', 'lon', 'population', 'country'];
 
     public function __construct(Database $database)
     {
@@ -80,7 +80,7 @@ class CitiesTableGateway implements GatewayInterface
 
     protected function validate(array $data): void
     {
-        $diff = array_diff(array_keys($data), static::columns);
+        $diff = array_diff(array_keys($data), static::ALLOWED_COLUMNS);
         if ($diff) {
             throw new UnknownColumnException("Unknown column(s): ". implode(",", $diff));
         }
