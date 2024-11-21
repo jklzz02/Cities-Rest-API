@@ -53,4 +53,9 @@ class Router
         throw new HTTPNotFoundException();
     }
 
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
 }

@@ -11,18 +11,23 @@ abstract class Controller
     public function handle(Request $request): void
     {
         switch (HTTPMethod::from($request->getMethod())) {
+
             case HTTPMethod::GET:
                 $this->handleGet($request);
                 break;
+
             case HTTPMethod::POST:
                 $this->handlePost($request);
                 break;
+
             case HTTPMethod::PATCH:
                 $this->handlePatch($request);
                 break;
+
             case HTTPMethod::PUT:
                 $this->handlePut($request);
                 break;
+                
             case HTTPMethod::DELETE:
                 $this->handleDelete($request);
                 break;
