@@ -55,11 +55,6 @@ class CitiesController extends Controller
 
         $this->validateId($params["id"]);
 
-        if(!$this->gateway->update($params['id'], $data)){
-
-            throw new HTTPNotFoundException("Cannot Update Resource Not Found");
-        }
-
         $this->gateway->update($params['id'], $data);
         $this->responder->success("Resource Updated");
 
@@ -74,11 +69,7 @@ class CitiesController extends Controller
 
         $this->validateFields($data, ['name', 'country', 'population', 'lat', 'lon']);
 
-        if(!$this->gateway->update($params['id'], $data)){
-
-            throw new HTTPNotFoundException("Cannot Update Resource Not Found");
-        }
-
+        $this->gateway->update($params['id'], $data);
         $this->responder->success("Resource Updated");
     }
 
@@ -89,12 +80,7 @@ class CitiesController extends Controller
 
         $this->validateId($params['id'] ?? false);
 
-        if (!$this->gateway->delete($params['id'])) {
-
-            throw new HTTPNotFoundException("Cannot Delete resource Not Found");
-        }
-
-
+        $this->gateway->delete($params['id']);
         $this->responder->success("Resource Deleted");
     }
 
