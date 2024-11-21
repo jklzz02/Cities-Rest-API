@@ -18,7 +18,7 @@ class Request{
         parse_str($uri['query'] ?? '', $this->queryParams);
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->headers = getallheaders();
-        $this->body = json_decode(file_get_contents('php://input'), true) ?? $_POST ?? [];
+        $this->body = json_decode(file_get_contents('php://input'), associative: true) ?? $_POST ?? [];
         
     }
 

@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
+use Jklzz02\RestApi\Exception\GatewayException\RecordNotFoundException;
 use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 use Jklzz02\RestApi\Interfaces\GatewayInterface;
 use PDO;
@@ -62,7 +63,7 @@ class CitiesTableGateway implements GatewayInterface
     public function update(int $id, array $data): bool
     {
         $this->validate($data);
-        if(!$this->checkId($id)) return false;
+        $this->checkId($id);
 
         $setClause = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
         $data['id'] = $id;
@@ -73,7 +74,7 @@ class CitiesTableGateway implements GatewayInterface
 
     public function delete(int $id): bool
     {
-        if(!$this->checkId($id)) return false;
+        $this->checkId($id);
         $stmt = $this->connection->prepare("DELETE FROM cities WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
@@ -86,10 +87,13 @@ class CitiesTableGateway implements GatewayInterface
         }
     }
 
-    protected function checkId(int $id): bool
+    protected function checkId(int $id): void
     {
         $stmnt = $this->connection->prepare("SELECT COUNT(*) FROM cities where id = :id");
         $stmnt->execute([':id' => $id]);
-        return $stmnt->fetchColumn() > 0;
+
+        if(!$stmnt->fetchColumn() > 0){
+            throw new RecordNotFoundException("No record with id: '$id'");
+        }
     }
 }
