@@ -18,7 +18,7 @@ This is the endpoint to make the requests, retrieve cities information, update o
 GET http://domain/v1/cities?id={city_id}
 ```
 
-inserting the id as a `query parameter` it's possible to retrieve the information of the city with that specic id.
+inserting the id as a `query parameter` allows to retrieve the information of the city with that specic id.
 
 #### Example request with ID
 
@@ -53,7 +53,7 @@ GET http://domain/v1/cities?city={your_city_name}
 
 ```
 
-Using this `URL` is possible to retrieve the information of all the cities that share the requested name.
+Use this `URL` to retrieve the information of all the cities that share the requested name.
 The search is case-insensitive, it's not required to titleize the city name.
 
 #### Example request with name
@@ -128,7 +128,7 @@ GET http://domain/v1/cities?city=rome
 
 ### City by latitude and longitude
 
-It's possible to retrieve a specific city trhough its latitude and longitude.
+To retrieve a specific city trhough its latitude and longitude.
 
 ```http
 GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
@@ -165,7 +165,7 @@ GET http://domain/v1/cities?lat=41.89193&lon=12.51133
 
 ### City by multiple parameters
 
-It's possible to use more parameters to narrow the matching results
+To narrow the results, use multiple parameters.
 
 #### Example request with multiple parameters
 
@@ -201,12 +201,12 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ### Language Level and Dependencies
 
-To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries
+To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries, alongside the [needed extensions](https://www.php.net/manual/en/pdo.installation.php) for **PDO**, usually enabled by default.
 
 #### Libraries
 
 The only used library is [vlucas/dotenv](https://github.com/vlucas/phpdotenv) a .env loader.
-It is used in the [config](/src/config.php) to populate `$_ENV` super global with environment variable.
+It is used in the [config](/src/config.php) to populate `$_ENV` super global with environment variables.
 
 ```PHP
 if (file_exists(BASE_PATH . '.env')) {
@@ -216,13 +216,11 @@ if (file_exists(BASE_PATH . '.env')) {
 ```
 
 Needed libraries and their versions can be consulted in [composer.json](/composer.json)
-to install needed libraries run:
+to install needed libraries run in the root directory of the project:
 
 ```BASH
 composer install
 ```
-
-in the root directory of the project.
 
 ### Create Database and tables
 
@@ -232,8 +230,8 @@ In the [sql](/sql) directory, there are schemas for different type of `SQL` supp
 
 #### Token Table
 
-The token table is meant for testing authentication for CRUD operation, you can generate your tokens and insert them in the database. Tokens can be generated using the [token generator](/bin/tokenGenerator) script.
-Make sure to give execute permission to the script
+The token table is meant for testing authentication for CRUD operation. Sample tokens can be generated using the [token generator](/bin/tokenGenerator) script.
+Make sure to give execute permission to the script before trying to run it.
 
 **Linux/MacOS**
 
@@ -241,7 +239,7 @@ Make sure to give execute permission to the script
 chmod +x bin/tokengenerator 
 ```
 
-Now simply run the script with this command  to generate a sample Token
+Now simply run the script with this command  to generate a sample Token.
 
 ```bash
 ./bin/tokenGenerator
@@ -249,7 +247,7 @@ Now simply run the script with this command  to generate a sample Token
 
 **Windows**
 
-Assuming that **PHP 8.2** or higher is installed in the system
+Assuming that **PHP 8.2** or higher is installed in the system.
 
 ```cmd
 php /bin/tokenGenerator
@@ -261,12 +259,12 @@ If you've created the database successfully it will suffice to run the [seed](/s
 
 ### Config and .env Setup
 
-In the dotenv it is possible to specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, mysql, pgsql, sqlsrv.
+In the .env specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, mysql, pgsql, sqlsrv.
 
 #### .env example for a SQLite database
 
 ```.env
-DB-TYPE=sqlite
+DB_TYPE=sqlite
 DB_NAME=your_database.sqlite3
 DB_HOST=
 DB_PORT=
@@ -280,7 +278,7 @@ in the case of a `SQLite` database `DB_NAME` will refer to its path, it will be 
 DB_NAME=subdir/your_database.sqlite3
 ```
 
-that's how the [Database](/src/Core/Database.php) class will handle the dsn
+that's how the [Database](/src/Core/Database.php) class will handle the **DSN**.
 
 ```PHP
 $dsn = "sqlite:" . BASE_PATH  . $config["name"];
@@ -291,10 +289,10 @@ $dsn = "sqlite:" . BASE_PATH  . $config["name"];
 ```.env
 DB_TYPE=your_database_type # mysql/pgsql
 DB_NAME=your_database_name
-DB_HOST=localhost # or the IP address of your server
-DB_PORT=3306 # or the port your MySQL/PostgreSQL server uses
+DB_HOST=localhost # or the IP address of the server
+DB_PORT=3306 # or the port that the MySQL/PostgreSQL server uses
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
->**NOTE** username and password are not mandatory.
+>**NOTE** username and password are not mandatory
