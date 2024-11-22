@@ -18,7 +18,7 @@ This is the endpoint to make the requests, retrieve cities information, update o
 GET http://domain/v1/cities?id={city_id}
 ```
 
-inserting the id as a `query parameter` allows to retrieve the information of the city with that specic id.
+Inserting the id as a `query parameter` allows to retrieve the information of the city with that specific id.
 
 #### Example request with ID
 
@@ -54,7 +54,7 @@ GET http://domain/v1/cities?city={your_city_name}
 ```
 
 Use this `URL` to retrieve the information of all the cities that share the requested name.
-The search is case-insensitive, it's not required to titleize the city name.
+The search is case-insensitive.
 
 #### Example request with name
 
@@ -201,7 +201,7 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ### Language Level and Dependencies
 
-To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries, alongside the [needed extensions](https://www.php.net/manual/en/pdo.installation.php) for **PDO**, usually enabled by default.
+To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries, alongside the [needed extensions](https://www.php.net/manual/en/pdo.installation.php) for `PDO`, usually enabled by default.
 
 #### Libraries
 
@@ -224,7 +224,7 @@ composer install
 
 ### Create Database and tables
 
-In the [sql](/sql) directory, there are schemas for different type of `SQL` supported databases. It will suffice to run the chosen schema.sql script to initialize the empty tables in the database.
+Create a database of the supported type (Mysql, PostgreSQL, SQLite). In the [sql](/sql) directory, there are schemas for different type of `SQL` supported databases. It will suffice to run the chosen schema.sql script to initialize the empty tables in the database.
 
 ### Populate Database
 
@@ -255,11 +255,11 @@ php /bin/tokenGenerator
 
 #### Cities Table
 
-If you've created the database successfully it will suffice to run the [seed](/sql/cities_seed.sql) script to populate the database with a sample of 100 cities.
+If the database was created successfully it will suffice to run the [seed](/sql/cities_seed.sql) script to populate the database with a sample of 100 cities.
 
 ### Config and .env Setup
 
-In the .env specify the type of database to use, make sure to use `PDO` dsn names for the database name such as: sqlite, mysql, pgsql, sqlsrv.
+In the .env specify the type of database to use, make sure to use `PDO` dsn names for the database type such as: sqlite, mysql, pgsql, sqlsrv.
 
 #### .env example for a SQLite database
 
@@ -288,7 +288,7 @@ $dsn = "sqlite:" . BASE_PATH  . $config["name"];
 
 ```.env
 DB_TYPE=your_database_type # mysql/pgsql
-DB_NAME=your_database_name
+DB_NAME=your_database_name # name of the created database
 DB_HOST=localhost # or the IP address of the server
 DB_PORT=3306 # or the port that the MySQL/PostgreSQL server uses
 DB_USERNAME=your_username
