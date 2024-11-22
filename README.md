@@ -128,7 +128,7 @@ GET http://domain/v1/cities?city=rome
 
 ### City by latitude and longitude
 
-To retrieve a specific city trhough its latitude and longitude.
+To retrieve a specific city through its latitude and longitude.
 
 ```http
 GET http://domain/v1/cities?lat={city_latitude}&lon={city_longitude}
