@@ -75,6 +75,11 @@ class Responder{
         $this->respond(ResponseStatus::NOT_FOUND, $message, $data);
     }
 
+    public function conflict(string $message = "The resource already exists", array $data = []): never
+    {
+        $this->respond(ResponseStatus::CONFLICT, $message, $data);
+    }
+
     public function internalError(string $message = "Internal Server Error", array $data = []): never
     {
         $this->respond(ResponseStatus::INTERNAL_ERROR, $message, $data);

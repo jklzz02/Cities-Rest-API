@@ -39,6 +39,10 @@ class CitiesController extends Controller
     {
         $data = $request->getBody();
 
+        if($data["id"] ?? false){
+            $this->validateId($data["id"]);
+        }
+
         $this->validateFields($data, $this->gateway::ALLOWED_COLUMNS, ["id"]);
         
         $this->gateway->insert($data);

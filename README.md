@@ -201,7 +201,7 @@ GET http://domain/v1/cities?name=rome&country=it
 
 ### Language Level and Dependencies
 
-To run the project is required **PHP 8.2** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries, alongside the [needed extensions](https://www.php.net/manual/en/pdo.installation.php) for `PDO`, usually enabled by default.
+To run the project is required **PHP 8.3** or higher and [composer](https://getcomposer.org/) in order to use its autoloader and install libraries, alongside the [needed extensions](https://www.php.net/manual/en/pdo.installation.php) for `PDO`, usually enabled by default.
 
 #### Libraries
 

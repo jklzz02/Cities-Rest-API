@@ -4,6 +4,7 @@ namespace Jklzz02\RestApi\Gateways;
 
 
 use Jklzz02\RestApi\Core\Database;
+use Jklzz02\RestApi\Exception\GatewayException\AlreadyExistsException;
 use Jklzz02\RestApi\Exception\GatewayException\RecordNotFoundException;
 use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 use Jklzz02\RestApi\Interfaces\GatewayInterface;
@@ -13,6 +14,7 @@ class CitiesTableGateway implements GatewayInterface
 {
     protected PDO $connection;
     public const array ALLOWED_COLUMNS = ['id', 'name', 'lat', 'lon', 'population', 'country'];
+    protected const INVALID_ID = -1;
 
     public function __construct(Database $database)
     {
@@ -50,9 +52,14 @@ class CitiesTableGateway implements GatewayInterface
 
     public function insert(array $data): bool
     {
-
         $this->validate($data);
 
+        if($this->checkId($data["id"] ?? static::INVALID_ID)){
+
+                throw new AlreadyExistsException();
+        }
+
+ 
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_map(fn($key) => ":$key", array_keys($data)));
 
@@ -63,7 +70,10 @@ class CitiesTableGateway implements GatewayInterface
     public function update(int $id, array $data): bool
     {
         $this->validate($data);
-        $this->checkId($id);
+        
+        if(!$this->checkId($id)){
+            throw new RecordNotFoundException();
+        }
 
         $setClause = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
         $data['id'] = $id;
@@ -74,7 +84,10 @@ class CitiesTableGateway implements GatewayInterface
 
     public function delete(int $id): bool
     {
-        $this->checkId($id);
+        if(!$this->checkId($id)){
+            throw new RecordNotFoundException();
+        }
+
         $stmt = $this->connection->prepare("DELETE FROM cities WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
@@ -87,13 +100,15 @@ class CitiesTableGateway implements GatewayInterface
         }
     }
 
-    protected function checkId(int $id): void
+    protected function checkId(int $id): bool
     {
-        $stmnt = $this->connection->prepare("SELECT COUNT(*) FROM cities where id = :id");
-        $stmnt->execute([':id' => $id]);
+        $stmt = $this->connection->prepare("SELECT COUNT(*) FROM cities where id = :id");
+        $stmt->execute([':id' => $id]);
 
-        if(!$stmnt->fetchColumn() > 0){
-            throw new RecordNotFoundException("No record with id: '$id'");
+        if(!$stmt->fetchColumn() > 0){
+            return false;
         }
+
+        return true;
     }
 }

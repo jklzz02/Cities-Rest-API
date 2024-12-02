@@ -2,6 +2,7 @@
 
 namespace Jklzz02\RestApi\Core;
 
+use Jklzz02\RestApi\Exception\GatewayException\AlreadyExistsException;
 use Jklzz02\RestApi\Exception\GatewayException\RecordNotFoundException;
 use Jklzz02\RestApi\Exception\GatewayException\UnknownColumnException;
 use Jklzz02\RestApi\Exception\HTTPException\HTTPBadRequestException;
@@ -31,6 +32,9 @@ class ExceptionHandler{
             case HTTPNotFoundException::class:
                 $this->responder->notFound();
                 break;
+            
+            case AlreadyExistsException::class:
+                $this->responder->conflict();
 
             case RecordNotFoundException::class:
                 $this->responder->notFound();
