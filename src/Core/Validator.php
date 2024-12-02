@@ -34,11 +34,12 @@ class Validator
         return true;
     }
 
-    public function array(array $source, array $required): string
+    public function array(array $source, array $requiredKeys, array $optionalKeys = []): string
     {
-        $missingKeys = array_diff($required, array_keys($source));
+        $missingKeys = array_diff($requiredKeys, array_keys($source));
+        $missingKeys = array_diff($missingKeys, $optionalKeys);
 
-        if(!empty($missingKeys)){
+        if($missingKeys ?? false){
             $missingKeysList = implode(', ', $missingKeys);
             return "Missing required parameter(s): {$missingKeysList}";
         }

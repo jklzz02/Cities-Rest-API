@@ -39,7 +39,7 @@ class CitiesController extends Controller
     {
         $data = $request->getBody();
 
-        $this->validateFields($data, $this->gateway::ALLOWED_COLUMNS);
+        $this->validateFields($data, $this->gateway::ALLOWED_COLUMNS, ["id"]);
         
         $this->gateway->insert($data);
         $this->responder->created();
@@ -89,9 +89,9 @@ class CitiesController extends Controller
         }
     }
 
-    private function validateFields(array $data, array $requiredFields): void
+    private function validateFields(array $data, array $requiredFields, array $optionalFields = []): void
     {
-        $missing = $this->validator->array($data, $requiredFields);
+        $missing = $this->validator->array($data, $requiredFields, $optionalFields);
         if ($missing){
             throw new HTTPBadRequestException($missing);
         }
