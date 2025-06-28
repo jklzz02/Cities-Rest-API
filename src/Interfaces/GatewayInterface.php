@@ -2,7 +2,6 @@
 
 namespace Jklzz02\RestApi\Interfaces;
 
-
 use Jklzz02\RestApi\Core\Database;
 
 interface GatewayInterface
@@ -13,5 +12,4 @@ interface GatewayInterface
     public function insert(array $data): bool;
     public function update(int $id, array $data): bool;
     public function delete(int $id): bool;
-
 }

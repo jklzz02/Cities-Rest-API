@@ -2,7 +2,6 @@
 
 namespace Jklzz02\RestApi\Gateways;
 
-
 use Jklzz02\RestApi\Core\Database;
 use Jklzz02\RestApi\Exception\GatewayException\AlreadyExistsException;
 use Jklzz02\RestApi\Exception\GatewayException\RecordNotFoundException;
@@ -59,7 +58,6 @@ class CitiesTableGateway implements GatewayInterface
                 throw new AlreadyExistsException();
         }
 
- 
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_map(fn($key) => ":$key", array_keys($data)));
 
@@ -84,7 +82,7 @@ class CitiesTableGateway implements GatewayInterface
 
     public function delete(int $id): bool
     {
-        if(!$this->checkId($id)){
+        if( !$this->checkId($id)) {
             throw new RecordNotFoundException();
         }
 
@@ -105,7 +103,7 @@ class CitiesTableGateway implements GatewayInterface
         $stmt = $this->connection->prepare("SELECT COUNT(*) FROM cities where id = :id");
         $stmt->execute([':id' => $id]);
 
-        if(!$stmt->fetchColumn() > 0){
+        if(!$stmt->fetchColumn() > 0) {
             return false;
         }
 

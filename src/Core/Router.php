@@ -13,7 +13,7 @@ class Router
 {
     protected array $routes = [];
 
-    public function add(HTTPMethod $method, string $path, Controller $controller) :static
+    public function add(HTTPMethod $method, string $path, Controller $controller): static
     {
         $this->routes[] = [
             "method" => $method->value,
@@ -40,13 +40,12 @@ class Router
         foreach($this->routes as $route){
             if($route["method"] === $method && $route["path"] === $path){
 
-                if($route["middleware"] ?? false){
+                if($route["middleware"] ?? false) {
 
                    MiddleWare::resolve($route["middleware"]);
                 }
 
              $route["controller"]->handle($request);
-            
             }
         }
 
